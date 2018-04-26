@@ -6,15 +6,40 @@ import java.io.IOException;
 
 public class Read {
 
-    public static void main(String[] args) throws IOException {
+    public FileReader fileReader;
+    public String Lines[];
+    public void read() throws IOException {
 
-        FileReader fileReader = new FileReader("/Users/rtc10/IdeaProjects/Assembler/src/input.txt");
+        String path = "/Users/yangchunghsuan/IdeaProjects/Assembler/src/input.txt";
+        fileReader = new FileReader(path);
 
+        int lines = count();
+        String Lines[] = new String[lines];
+
+        fileReader = new FileReader(path);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+        int i = 0;
         while(bufferedReader.ready()){
-            System.out.println(bufferedReader.readLine());
+            Lines[i] = bufferedReader.readLine();
+            i++;
+        }
+
+        for (i=0 ;i<Lines.length;i++){
+            System.out.println(Lines[i]);
+        }
+//        fileReader.close();
+    }
+
+    public int count() throws IOException {
+        int i= 0;
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        while (bufferedReader.ready()){
+            bufferedReader.readLine();
+            i++;
         }
         fileReader.close();
+        return i;
     }
 
 }

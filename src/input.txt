@@ -1,19 +1,7 @@
-Line Loc     Objectcode5    COPY
-10
-15
-20
-25
-30
-35
-40
-50
-55
-60
-65
-70
-75
-80
-85
-90
-95
-100
+PRO      START   1000
+FIRST    STL     RETADR
+         LDA     ZERO
+         JSUB    GETC
+         LDX     ADDRE
+         STCH    0,X
+FIN      LDL     RETADR
