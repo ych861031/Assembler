@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+
 public class Main {
 
     public static void main(String[] args) throws IOException {
@@ -11,7 +12,17 @@ public class Main {
         }
 
         Decompose de = new Decompose();
-        de.decompose(readFile.fileReader);
+        de.decompose(readFile.getLines());
+        Symbol symbol = new Symbol();
+        symbol.setHashMap();
+//        System.out.println(symbol.getValue("LDX"));
     }
+
+
+
+
+
+
+
 
 }

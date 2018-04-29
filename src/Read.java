@@ -7,14 +7,14 @@ import java.io.IOException;
 public class Read {
 
     public FileReader fileReader;
-    public String Lines[];
+    public String[] Lines;
     public void read() throws IOException {
 
         String path = "/Users/yangchunghsuan/IdeaProjects/Assembler/src/input.txt";
         fileReader = new FileReader(path);
 
         int lines = count();
-        String Lines[] = new String[lines];
+        Lines = new String[lines];
 
         fileReader = new FileReader(path);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -28,7 +28,10 @@ public class Read {
         for (i=0 ;i<Lines.length;i++){
             System.out.println(Lines[i]);
         }
-//        fileReader.close();
+        fileReader.close();
+    }
+    public String[] getLines(){
+        return this.Lines;
     }
 
     public int count() throws IOException {
