@@ -10,7 +10,7 @@ public class Read {
     public String[] Lines;
     public void read() throws IOException {
 
-        String path = "/Users/yangchunghsuan/IdeaProjects/Assembler/src/input.txt";
+        String path = "C:\\Users\\USER\\IdeaProjects\\Assembler\\src\\input.txt";
         fileReader = new FileReader(path);
 
         int lines = count();
