@@ -16,6 +16,9 @@ public class Main {
         Symbol symbol = new Symbol();
         symbol.setHashMap();
 //        System.out.println(symbol.getValue("LDX"));
+
+        Loc loc = new Loc();
+        loc.setLoc();
     }
 
 

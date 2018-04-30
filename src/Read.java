@@ -10,6 +10,7 @@ public class Read {
     public String[] Lines;
     public void read() throws IOException {
 
+        //path改成自己input.txt在的路徑
         String path = "C:\\Users\\USER\\IdeaProjects\\Assembler\\src\\input.txt";
         fileReader = new FileReader(path);
 
