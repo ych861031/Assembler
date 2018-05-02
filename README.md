@@ -7,10 +7,10 @@ Main.java
 
 read.java
 -
-把input.txt讀入程式，用String[]儲存每一行，\<br>
-ex:\<br>
-  string[0] = COPY     START   1000              Comments /<br>
-  string[1] = FIRST    STL     RETADR            Comments2 \<br>
+把input.txt讀入程式，用String[]儲存每一行，
+-ex:
+- string[0] = COPY     START   1000              Comments
+- string[1] = FIRST    STL     RETADR            Comments2 
 
 Decompose.java
 -
