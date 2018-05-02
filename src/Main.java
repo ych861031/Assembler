@@ -13,8 +13,10 @@ public class Main {
 
         Decompose de = new Decompose();
         de.decompose(readFile.getLines());
-        Symbol symbol = new Symbol();
-        symbol.setHashMap();
+
+        MnemonicCode mnemonicCode = new MnemonicCode();
+        mnemonicCode.setHashMap();
+
 //        System.out.println(symbol.getValue("LDX"));
 
         Loc loc = new Loc();

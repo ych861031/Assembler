@@ -1,7 +1,6 @@
 import java.util.HashMap;
 
-public class Symbol {
-
+public class MnemonicCode {
     String[] instruction = {"LDA","LDB","LDX","ADD","JSUB","JEQ","STA","J","ADDR","CLEAR","COMPR","SUBR",
             "TIX","RSUB"};
     String[] value = {"00","68","04","18","48","30","0C","3C","90","B4","A0","94","2C","4C"};
