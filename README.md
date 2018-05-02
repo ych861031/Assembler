@@ -17,8 +17,8 @@ Decompose.java
 -
 把Read所存的String[]分解成 Label opearation operend comment四個部分，
 - ex:
-- Label[0] = COPY   Operation[0] = STL   Operend[0] = RETADR Comments[0] = Comments 
-- Label[1] = FIRST  Operation[1] = JSUB  Operend[1] = RDREC  Comments[1] = Comments2 
+  - Label[0] = COPY     Operation[0] = STL     Operend[0] = RETADR   Comments[0] = Comments 
+  - Label[1] = FIRST    Operation[1] = JSUB    Operend[1] = RDREC    Comments[1] = Comments2 
 
 - 到這裡已經完成20% 
 
@@ -26,7 +26,7 @@ MnemonicCode.java
 -
 - 用hashMap存助憶碼，
 - 用法：
--  mnemonicCode.getValue("LDX");
+  -  mnemonicCode.getValue("LDX");
 -  可以得到LDX的助憶碼
 - （如果不好用可以換方法做）
 
