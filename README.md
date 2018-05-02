@@ -36,7 +36,7 @@ Loc.java
 目前要做的事
 =
 - 算出Loc位址，算出Opcode
-- (我晚點會先把input.txt內容改成較簡單的SIC指令）
+
 
 
 
