@@ -3,12 +3,15 @@ import java.util.List;
 
 public class Decompose {
 
+    public static String[] Label;
+    public static String[] Operation;
+    public static String[] Operend;
     public void decompose(String[] Lines){
 
         System.out.println("decompose...");
 
 
-        String[] Label = new String[50];
+        Label = new String[50];
         System.out.println("Label...");
         for (int i=0;i<Lines.length;i++){
 
@@ -25,7 +28,7 @@ public class Decompose {
             Label[i] = label;
         }
 
-        String[] Operation = new String[100];
+        Operation = new String[100];
         System.out.println("operation...");
         for (int i=0;i<Lines.length;i++){
             String operation = "";
@@ -45,7 +48,7 @@ public class Decompose {
 
         }
 
-        String[] Operend = new String[100];
+        Operend = new String[100];
         System.out.println("operend...");
         for (int i=0;i<Lines.length;i++){
             String operend = "";
