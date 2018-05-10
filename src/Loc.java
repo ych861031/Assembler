@@ -36,10 +36,22 @@ public class Loc {
                     System.out.println(LocaTion[i]);
                     break;
                 case "RESW":
-                    System.out.println(Decompose.Operation[i]);
+                    long temp = Long.parseLong(LocaTion[i-1],16);
+                    long temp2 = Long.parseLong(Decompose.Operend[i],10);
+
+                    temp2 = temp+temp2*3;
+                    LocaTion[i] = Long.toHexString(temp2);
+                    System.out.println(LocaTion[i]);
                     break;
                 case "RESB":
-                    System.out.println(Decompose.Operation[i]);
+
+                    long Temp = Long.parseLong(LocaTion[i-1],16);
+                    long Temp2 = Long.parseLong(Decompose.Operend[i],10);
+
+                    Temp2 = Temp+Temp2;
+                    LocaTion[i] = Long.toHexString(Temp2);
+                    System.out.println(LocaTion[i]);
+
                     break;
                 case "END":
                     System.out.println(Decompose.Operation[i]);
@@ -55,7 +67,9 @@ public class Loc {
                     }else{
                         long tmp = Long.parseLong(LocaTion[i-1],16);
                         tmp=tmp+3;
-                        LocaTion[i] =Long.toHexString(tmp);
+                        long last = Long.parseLong(LocaTion[i],16);
+                        last = last+tmp;
+                        LocaTion[i] =Long.toHexString(last);
                         System.out.println(LocaTion[i]);
 
                     }
