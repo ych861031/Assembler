@@ -9,8 +9,6 @@ public class Read {
     public FileReader fileReader;
     public String[] Lines;
     public void read() throws IOException {
-
-        //path改成自己input.txt在的路徑
         String path = "input.txt";
         fileReader = new FileReader(path);
 
