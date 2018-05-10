@@ -10,80 +10,104 @@ public class Loc {
 
     public void setLoc() {
 
-//        int i = 200;
         int x;
         for(x=0;x<100;x++) {
             LocaTion[x] ="0000";
         }
-//        String test1 = Integer.toOctalString(i);
-//        String test2 = Integer.toHexString(i);
-//        String test3 = Integer.toBinaryString(i);
-//
-//        System.out.println(test1);
-//        System.out.println(test2);
-//        System.out.println(test3);
 
-//        long x = Long.parseLong(locTest[0],16); //(radix)進位 轉 十進位
-//        System.out.println(x);
-//        System.out.println(Decompose.Label[0]);
-//        System.out.println(Decompose.Operation[0]);
-//        System.out.println(Decompose.Operend[0]);
         int i ;
-        for(i=0;i<100;i++) {
-            switch (Decompose.Operation[i]) {
+        System.out.println(Decompose.Operation[2]);
+        LocaTion[0] = Decompose.Operend[0];
+        System.out.println(LocaTion[0]);
+        for(i=1;i<100;i++){
+            switch (Decompose.Operation[i-1]){
                 case "START":
-                    LocaTion[i] = Decompose.Operend[i];
+                    LocaTion[i]=Decompose.Operend[i-1];
                     System.out.println(LocaTion[i]);
                     break;
-                case "RESW":
-                    long temp = Long.parseLong(LocaTion[i-1],16);
-                    long temp2 = Long.parseLong(Decompose.Operend[i],10);
+                case "BYTE":
+                    String a = Decompose.Operend[i-1];
 
-                    temp2 = temp+temp2*3;
-                    LocaTion[i] = Long.toHexString(temp2);
-                    System.out.println(LocaTion[i]);
-                    break;
-                case "RESB":
+                    System.out.println(a.substring(2,a.length()-1));
 
-                    long Temp = Long.parseLong(LocaTion[i-1],16);
-                    long Temp2 = Long.parseLong(Decompose.Operend[i],10);
-
-                    Temp2 = Temp+Temp2;
-                    LocaTion[i] = Long.toHexString(Temp2);
-                    System.out.println(LocaTion[i]);
-
-                    break;
-                case "END":
-                    System.out.println(Decompose.Operation[i]);
-                    break;
-//                case "":
-//                    break;
-//                case "":
-//                    break;
-                default:
-                    if(Decompose.Operation[i-1].equals("START")){
-                        LocaTion[i] = Decompose.Operend[i-1];
-                        System.out.println(LocaTion[i]);
-                    }else{
-                        long tmp = Long.parseLong(LocaTion[i-1],16);
-                        tmp=tmp+3;
-                        long last = Long.parseLong(LocaTion[i],16);
-                        last = last+tmp;
-                        LocaTion[i] =Long.toHexString(last);
-                        System.out.println(LocaTion[i]);
+                    if (a.equals("EOF")){
 
                     }
-//                    System.out.println(Decompose.Operation[i]+"*");
+
+                    System.out.println(Decompose.Operend[i-1]);
+                    break;
+                case "WORD":
+                    break;
+                case "RESB":
+                    break;
+                case "RESW":
+                    break;
+                case "END":
+                    break;
+                default:
                     break;
             }
-
             if (Decompose.Operation[i].equals("END") ){
                 break;
             }
-
-
         }
+//        for(i=0;i<100;i++) {
 
+//            switch (Decompose.Operation[i]) {
+//                case "START":
+//                    LocaTion[i] = Decompose.Operend[i];
+//                    System.out.println(LocaTion[i]);
+//                    break;
+//                case "RESW":
+//                    long temp = Long.parseLong(LocaTion[i-1],16);
+//                    long temp2 = Long.parseLong(Decompose.Operend[i],10);
+//
+//                    temp2 = temp+temp2*3;
+//                    LocaTion[i] = Long.toHexString(temp2);
+//                    System.out.println(LocaTion[i]);
+//                    break;
+//                case "RESB":
+//
+//                    long Temp = Long.parseLong(LocaTion[i-1],16);
+//                    long Temp2 = Long.parseLong(Decompose.Operend[i],10);
+//
+//                    Temp2 = Temp+Temp2;
+//                    LocaTion[i] = Long.toHexString(Temp2);
+//                    System.out.println(LocaTion[i]);
+//
+//                    break;
+//                case "END":
+//                    System.out.println(Decompose.Operation[i]);
+//                    break;
+//                case "":
+//                    break;
+//                case "":
+//                    break;
+//                default:
+//                    if(Decompose.Operation[i-1].equals("START")){
+//                        LocaTion[i] = Decompose.Operend[i-1];
+//                        System.out.println(LocaTion[i]);
+//                    }else{
+//                        long tmp = Long.parseLong(LocaTion[i-1],16);
+//                        tmp=tmp+3;
+//                        long last = Long.parseLong(LocaTion[i],16);
+//                        last = last+tmp;
+//                        LocaTion[i] =Long.toHexString(last);
+//                        System.out.println(LocaTion[i]);
+//
+//                    }
+
+//                    System.out.println(Decompose.Operation[i]+"*");
+//                    break;
+//            }
+//
+//            if (Decompose.Operation[i].equals("END") ){
+//                break;
+//            }
+//
+//
+//        }
+//
     }
 
 
