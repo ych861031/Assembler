@@ -19,8 +19,11 @@ public class Main {
 
 //        System.out.println(symbol.getValue("LDX"));
 
-        Loc loc = new Loc();
-        loc.setLoc();
+//        Loc loc = new Loc();
+//        loc.setLoc();
+
+        GenerateOpcode generateOpcode = new GenerateOpcode();
+        generateOpcode.generate();
     }
 
 
