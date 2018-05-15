@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -6,14 +7,22 @@ public class Decompose {
     public static String[] Label;
     public static String[] Operation;
     public static String[] Operend;
+    public static String[] Comments;
+    public static HashMap<Integer,String> Annotaion = new HashMap<>();
+    public static ArrayList Ann = new ArrayList();
+
     public void decompose(String[] Lines){
 
         System.out.println("decompose...");
-
-
-        Label = new String[50];
+        Label = new String[100];
         System.out.println("Label...");
+        int ann=0;
         for (int i=0;i<Lines.length;i++){
+            char dot = Lines[i].charAt(0);
+           if (dot == '.'){
+                Annotaion.put(i,Lines[i]);
+                continue;
+            }
 
             String label = "";
             for (int j=0;j<8;j++){
@@ -73,7 +82,7 @@ public class Decompose {
         }
 
         System.out.println("Comments....");
-        String[] Comments = new String[100];
+        Comments = new String[100];
         for (int i=0;i<Lines.length;i++){
             try{
                 char c = Lines[i].charAt(35);
@@ -85,10 +94,6 @@ public class Decompose {
             }
 
         }
-
-
-
-
 //        可忽略,查看分解除來的
 //        System.out.println("Look Label...");
 //        for (int k=0;k<Label.length;k++){

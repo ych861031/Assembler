@@ -9,7 +9,7 @@ public class Read {
     public FileReader fileReader;
     public String[] Lines;
     public void read() throws IOException {
-        String path = "input.txt";
+        String path = "SRCFILE.txt";
         fileReader = new FileReader(path);
 
         int lines = count();

@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.annotation.Annotation;
 
 
 public class Main {
@@ -24,6 +25,19 @@ public class Main {
 
         GenerateOpcode generateOpcode = new GenerateOpcode();
         generateOpcode.generate();
+
+
+        //
+        String test = "EOF";
+        System.out.println(Integer.toHexString((int)test.charAt(0)).toUpperCase()+Integer.toHexString((int)test.charAt(1)).toUpperCase()
+                +Integer.toHexString((int)test.charAt(2)).toUpperCase());
+
+        for (int i=0;i<Decompose.Operend.length;i++) {
+
+            if (!(Decompose.Annotaion.get(i)==null)){
+                System.out.println(Decompose.Annotaion.get(i));
+            }
+        }
 
     }
 
