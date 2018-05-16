@@ -97,7 +97,7 @@ public class Decompose {
 //        System.out.println("Look Label...");
 //        for (int k=0;k<Label.length;k++){
 //            if (Label[k]!=null){
-//                System.out.println(Label[k]);
+//                System.out.println(k+ " " + Label[k]);
 //            }
 //        }
 ////
