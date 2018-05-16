@@ -15,15 +15,22 @@ public class Decompose {
 
         System.out.println("decompose...");
         Label = new String[100];
-        System.out.println("Label...");
-        int ann=0;
+        Operation = new String[100];
+        Operend = new String[100];
+        Comments = new String[100];
+
+
+
         for (int i=0;i<Lines.length;i++){
             char dot = Lines[i].charAt(0);
             if (dot == '.'){
                 Annotaion.put(i,Lines[i]);
+                Operation[i] = "";
+                Operend[i] = "";
                 continue;
             }
 
+            //label
             String label = "";
             for (int j=0;j<6;j++){
                 char c = Lines[i].charAt(j);
@@ -35,37 +42,30 @@ public class Decompose {
             }
 //            System.out.println(label);
             Label[i] = label;
-        }
 
-        Operation = new String[100];
-        System.out.println("operation...");
-        for (int i=0;i<Lines.length;i++){
-            String operation = "";
+            //opeation
+            String operation="";
+
             try{
-                for (int j=8;j<15;j++){
+                for (int j=7;j<15;j++){
                     char c = Lines[i].charAt(j);
                     if (!String.valueOf(c).equals(" ")){
-                       operation = operation+c;
+                        operation = operation+c;
                     }
                 }
-            }catch (Exception e){
-                Operation[i] = operation;
+            }catch (Exception e){ Operation[i] = operation;
                 continue;
             }
 //            System.out.println(operation);
             Operation[i] = operation;
 
-        }
-
-        Operend = new String[100];
-        System.out.println("operend...");
-        for (int i=0;i<Lines.length;i++){
+          //operend
             String operend = "";
             try{
-                for (int j=16;j<23;j++){
+                for (int j=15;j<23;j++){
                     char c = Lines[i].charAt(j);
                     if (!String.valueOf(c).equals(" ")){
-                       operend = operend + c;
+                        operend = operend + c;
                     }else {
 //                        System.out.println(operend);
 //                        Operend[i] = operend;
@@ -79,21 +79,20 @@ public class Decompose {
             }
             Operend[i] = operend;
 
-        }
 
-        System.out.println("Comments....");
-        Comments = new String[100];
-        for (int i=0;i<Lines.length;i++){
+
+            //comments
             try{
                 char c = Lines[i].charAt(26);
                 if (!String.valueOf(c).equals(" ")){
-                    Comments[i] = Lines[i].substring(26,Lines[i].length());
+                    Comments[i] = Lines[i].substring(25,Lines[i].length());
                 }
             }catch (Exception e){
                 continue;
             }
-
         }
+
+
 //        可忽略,查看分解除來的
 //        System.out.println("Look Label...");
 //        for (int k=0;k<Label.length;k++){
@@ -101,7 +100,7 @@ public class Decompose {
 //                System.out.println(Label[k]);
 //            }
 //        }
-
+////
 //        System.out.println("Look Operation...");
 //        for (int k=0;k<Operation.length;k++){
 //            if (Operation[k]!=null){
@@ -117,7 +116,7 @@ public class Decompose {
 //            }
 //        }
 
-//          System.out.println("Look Cppments...");
+//          System.out.println("Look Comments...");
 //          for (int k=0;k<Label.length;k++){
 //              if (Comments[k]!=null){
 //                  System.out.println(Comments[k]);
