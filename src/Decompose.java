@@ -19,13 +19,13 @@ public class Decompose {
         int ann=0;
         for (int i=0;i<Lines.length;i++){
             char dot = Lines[i].charAt(0);
-           if (dot == '.'){
+            if (dot == '.'){
                 Annotaion.put(i,Lines[i]);
                 continue;
             }
 
             String label = "";
-            for (int j=0;j<8;j++){
+            for (int j=0;j<6;j++){
                 char c = Lines[i].charAt(j);
                 if (!String.valueOf(c).equals(" ")){
                     label = label+c;
@@ -42,7 +42,7 @@ public class Decompose {
         for (int i=0;i<Lines.length;i++){
             String operation = "";
             try{
-                for (int j=9;j<15;j++){
+                for (int j=8;j<15;j++){
                     char c = Lines[i].charAt(j);
                     if (!String.valueOf(c).equals(" ")){
                        operation = operation+c;
@@ -62,7 +62,7 @@ public class Decompose {
         for (int i=0;i<Lines.length;i++){
             String operend = "";
             try{
-                for (int j=17;j<35;j++){
+                for (int j=16;j<23;j++){
                     char c = Lines[i].charAt(j);
                     if (!String.valueOf(c).equals(" ")){
                        operend = operend + c;
@@ -85,9 +85,9 @@ public class Decompose {
         Comments = new String[100];
         for (int i=0;i<Lines.length;i++){
             try{
-                char c = Lines[i].charAt(35);
+                char c = Lines[i].charAt(26);
                 if (!String.valueOf(c).equals(" ")){
-                    Comments[i] = Lines[i].substring(35,Lines[i].length());
+                    Comments[i] = Lines[i].substring(26,Lines[i].length());
                 }
             }catch (Exception e){
                 continue;
