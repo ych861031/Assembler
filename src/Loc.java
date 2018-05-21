@@ -28,13 +28,31 @@ public class Loc {
                 case "BYTE":
                     String a = Decompose.Operend[i-1];
 
-                    System.out.println(a.substring(2,a.length()-1));
+                    String BeforeAscii = a.substring(2,a.length()-1);
+
+
+//                    int ascii = (int)ASCII.charAt(0);
+//                    int ascii2 = (int)ASCII.charAt(1);
+//                    String tmp = Integer.toString(ascii)+Integer.toString(ascii2);
+//                    String tmp = Integer.toString(ascii);
+//                    int temp = Integer.valueOf(tmp);
+//                    tmp = Integer.toHexString(temp);
+                    int j;
+                    String ascii="";
+                    for(j=0;j<BeforeAscii.length();j++){
+                        int temp = (int)BeforeAscii.charAt(j);
+                        ascii = ascii+Integer.toHexString(temp);
+                    }
+
+                    System.out.println(Decompose.Operend[i-1]);
+
+                    System.out.println(BeforeAscii+"---"+ascii);
+
+                    System.out.println();
 
                     if (a.equals("EOF")){
 
                     }
-
-                    System.out.println(Decompose.Operend[i-1]);
                     break;
                 case "WORD":
                     break;
