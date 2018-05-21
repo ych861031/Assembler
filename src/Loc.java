@@ -37,21 +37,36 @@ public class Loc {
 //                    String tmp = Integer.toString(ascii);
 //                    int temp = Integer.valueOf(tmp);
 //                    tmp = Integer.toHexString(temp);
-                    int j;
-                    String ascii="";
-                    for(j=0;j<BeforeAscii.length();j++){
-                        int temp = (int)BeforeAscii.charAt(j);
-                        ascii = ascii+Integer.toHexString(temp);
-                    }
+//                    int j;
+//                    String ascii="";
+//                    for(j=0;j<BeforeAscii.length();j++){
+//                        int temp = (int)BeforeAscii.charAt(j);
+//                        ascii = ascii+Integer.toHexString(temp);
+//                    }
+//
+//                    System.out.println(Decompose.Operend[i-1]);
+//
+//                    System.out.println(BeforeAscii+"---"+ascii);
 
-                    System.out.println(Decompose.Operend[i-1]);
 
-                    System.out.println(BeforeAscii+"---"+ascii);
+                    String b;
+                    b = a.substring(0,1);
 
-                    System.out.println();
+                    if (b.equals("C")){
+//                        System.out.println(a.charAt(0)+"...C");
+                        int j;
+                        String ascii="";
+                        for(j=0;j<BeforeAscii.length();j++){
+                            int temp = (int)BeforeAscii.charAt(j);
+                            ascii = ascii+Integer.toHexString(temp);
+                        }
 
-                    if (a.equals("EOF")){
+                        System.out.println(Decompose.Operend[i-1]);
 
+                        System.out.println(BeforeAscii+"---"+ascii);
+
+                    }else if(b.equals("X")){
+//                        System.out.println("XXX");
                     }
                     break;
                 case "WORD":
