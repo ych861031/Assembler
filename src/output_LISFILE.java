@@ -1,5 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 
 public class output_LISFILE {
 
@@ -17,11 +18,27 @@ public class output_LISFILE {
         //檔案輸出的形式可以看看assembler exercise 的LISFILE
         //先把這個檔案的ＳＲＣＦＩＬＥ.txt的檔案內容複製到ＳＲＣＦＩＬＥ裡 執行sicasm.exe 就可以開ＬＩＳＦＩＬＥ看結果
 
+        int l=0;
+        for (int i =0;i<Decompose.Operation.length;i++){
+            if (Decompose.Operation[i]!=null){
+                l++;
+            }
+        }
+
+
         FileWriter fr = new FileWriter("LISFILE.txt");
-        for (int i=0;i<Loc.locTest.length;i++){
+
+        for (int i=0;i<l;i++){
+
+            if (Decompose.Annotaion.get(i)!=null){
+                fr.write(Decompose.Annotaion.get(i)+"\n");
+                continue;
+            }
+
+
 
             //opcode 格式調整
-            String opcode;
+            String opcode ;
             if (!GenerateOpcode.Opcode_test[i].equals("")){
                 opcode = GenerateOpcode.Opcode_test[i];
                 for (int space = GenerateOpcode.Opcode_test[i].length(); space <= 8 ;space++){
