@@ -10,10 +10,28 @@ public class GenerateOpcode {
     };
 
     public void generate(){
-        Loc loc = new Loc();
-//        for (int i = 0;i<loc.locTest.length;i++){
-//            System.out.println(loc.locTest[i]);
-//        }
 
+        for (int i=0;i<Decompose.Operation.length;i++){
+            Disp("","");
+        }
+
+
+    }
+
+
+    //位移
+    public String Disp(String hex1,String hex2){
+
+
+
+        return "";
+    }
+
+    //格式操作
+    public String bits_operation(){
+        String opcode="";
+
+
+        return opcode;
     }
 }

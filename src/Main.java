@@ -25,6 +25,13 @@ public class Main {
         Loc loc = new Loc();
         loc.setLoc();
 
+        Sytab sytab = new Sytab();
+        sytab.set();
+
+        //test sytab
+//        System.out.println(sytab.get("RDREC"));
+
+
         GenerateOpcode generateOpcode = new GenerateOpcode();
         generateOpcode.generate();
 

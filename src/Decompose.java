@@ -25,6 +25,7 @@ public class Decompose {
             char dot = Lines[i].charAt(0);
             if (dot == '.'){
                 Annotaion.put(i,Lines[i]);
+                Label[i] = "";
                 Operation[i] = "";
                 Operend[i] = "";
                 continue;
