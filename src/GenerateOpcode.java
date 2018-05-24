@@ -1,3 +1,5 @@
+
+
 public class GenerateOpcode {
 
     public static String[] Opcode_test = {
@@ -11,20 +13,34 @@ public class GenerateOpcode {
 
     public void generate(){
 
-        for (int i=0;i<Decompose.Operation.length;i++){
-            Disp("","");
-        }
-
+//        for (int i=0;i<Decompose.Operation.length;i++){
+//            Disp("1000","1006");
+//        }
+        System.out.println("!!!"+Disp("001A","0006"));
 
     }
 
 
     //位移
     public String Disp(String hex1,String hex2){
+        int sum1=Integer.parseInt(hex1,16);
+        int sum2=Integer.parseInt(hex2,16);
+        int sum=sum2-sum1;
+        Integer.toHexString(sum).toUpperCase();
 
 
+        //Integer.valueOf("FFFF",16).toString()
 
-        return "";
+        if (sum<0) {
+
+            //String sumString = String.valueOf(sum);
+
+            return Integer.toHexString(sum).toUpperCase().substring(5,8);
+
+        }
+
+        return Integer.toHexString(sum).toUpperCase();
+
     }
 
     //格式操作
