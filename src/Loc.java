@@ -77,12 +77,12 @@ public class Loc {
                         System.out.println(LocaTion[i]+"---X");
                     }
                     break;
-                case "WORD":
-                    break;
-                case "RESB":
-                    break;
-                case "RESW":
-                    break;
+//                case "WORD":
+//                    break;
+//                case "RESB":
+//                    break;
+//                case "RESW":
+//                    break;
                 case "END":
                     break;
                 default:
