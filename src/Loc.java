@@ -19,11 +19,13 @@ public class Loc {
         int i ;
         System.out.println(Decompose.Operation[2]);
         LocaTion[0] = Decompose.Operend[0];
+        LocaTion[0]=checkForFourNum(LocaTion[0]);
         System.out.println(LocaTion[0]);
         for(i=1;i<100;i++){
             switch (Decompose.Operation[i-1]){
                 case "START":
                     LocaTion[i]=Decompose.Operend[i-1];
+                    LocaTion[i]=checkForFourNum(LocaTion[i]);
                     System.out.println(LocaTion[i]);
                     break;
                 case "BYTE":
@@ -99,6 +101,15 @@ public class Loc {
 
                     break;
                 case "END":
+                    break;
+                case "+JSUB":
+                    long tmpJSUB = Long.parseLong(LocaTion[i-1],16);
+                    tmpJSUB=tmpJSUB+4;
+                    long lastJSUB = Long.parseLong(LocaTion[i],16);
+                    lastJSUB = lastJSUB+tmpJSUB;
+                    LocaTion[i] =Long.toHexString(lastJSUB);
+                    LocaTion[i]=checkForFourNum(LocaTion[i]);
+                    System.out.println(LocaTion[i]+Decompose.Operation[i-1]);
                     break;
                 default:
                     long tmp = Long.parseLong(LocaTion[i-1],16);
