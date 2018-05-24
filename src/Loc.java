@@ -121,8 +121,26 @@ public class Loc {
 //                    LocaTion[i]=checkForFourNum(LocaTion[i]);
 //                    System.out.println(LocaTion[i]+Decompose.Operation[i-1]);
 //                    break;
+                case "CLEAR":
+                    long tmpCLEAR = Long.parseLong(LocaTion[i-1],16);
+                    tmpCLEAR=tmpCLEAR+2;
+                    long lastCLEAR = Long.parseLong(LocaTion[i],16);
+                    lastCLEAR = lastCLEAR+tmpCLEAR;
+                    LocaTion[i] =Long.toHexString(lastCLEAR);
+                    LocaTion[i]=checkForFourNum(LocaTion[i]);
+                    System.out.println(LocaTion[i]);
+                    break;
+                case "COMPR":
+                    long tmpCOMPR = Long.parseLong(LocaTion[i-1],16);
+                    tmpCOMPR=tmpCOMPR+2;
+                    long lastCOMPR= Long.parseLong(LocaTion[i],16);
+                    lastCOMPR= lastCOMPR+tmpCOMPR;
+                    LocaTion[i] =Long.toHexString(lastCOMPR);
+                    LocaTion[i]=checkForFourNum(LocaTion[i]);
+                    System.out.println(LocaTion[i]);
+                    break;
                 default:
-                    boolcheckPlus = checkPlus(Decompose.Operation[i-1]);
+                    boolcheckPlus = checkPlus(Decompose.Operation[i-1]);//需要確認是不是有其他+的可能
                     if(boolcheckPlus==true){
                         long tmp = Long.parseLong(LocaTion[i-1],16);
                         tmp=tmp+4;
