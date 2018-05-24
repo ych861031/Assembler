@@ -1,4 +1,4 @@
-
+import java.security.acl.LastOwnerException;
 
 public class Loc {
     public static String[] locTest = {"0000", "0000", "0003","    " ,"0006", "000A", "000D","0010","0013", "0017", "001A", "001D", "0020",
@@ -11,6 +11,7 @@ public class Loc {
     public void setLoc() {
 
 //        int findfault=0;
+        boolean boolcheckPlus  = false;
         int x;
         for(x=0;x<100;x++) {
             LocaTion[x] ="0000";
@@ -33,7 +34,6 @@ public class Loc {
 
                     String BeforeAscii = a.substring(2,a.length()-1);
 
-
 //                    int ascii = (int)ASCII.charAt(0);
 //                    int ascii2 = (int)ASCII.charAt(1);
 //                    String tmp = Integer.toString(ascii)+Integer.toString(ascii2);
@@ -41,8 +41,6 @@ public class Loc {
 //                    int temp = Integer.valueOf(tmp);
 //                    tmp = Integer.toHexString(temp);
 //
-
-
                     String b;
                     b = a.substring(0,1);//取第一個符號
 
@@ -102,23 +100,47 @@ public class Loc {
                     break;
                 case "END":
                     break;
-                case "+JSUB":
-                    long tmpJSUB = Long.parseLong(LocaTion[i-1],16);
-                    tmpJSUB=tmpJSUB+4;
-                    long lastJSUB = Long.parseLong(LocaTion[i],16);
-                    lastJSUB = lastJSUB+tmpJSUB;
-                    LocaTion[i] =Long.toHexString(lastJSUB);
-                    LocaTion[i]=checkForFourNum(LocaTion[i]);
-                    System.out.println(LocaTion[i]+Decompose.Operation[i-1]);
+                case "BASE":
+                    System.out.println("U need four space");
+                    LocaTion[i] = LocaTion[i-1];
+                    LocaTion[i-1] ="    ";
                     break;
+
+                case "":
+                    System.out.println("this has four space");
+                    LocaTion[i] = LocaTion[i-1];
+                    LocaTion[i-1] ="    ";
+                    break;
+//                case "+JSUB":
+//                    checkPlus(Decompose.Operation[i-1]);
+//                    long tmpJSUB = Long.parseLong(LocaTion[i-1],16);
+//                    tmpJSUB=tmpJSUB+4;
+//                    long lastJSUB = Long.parseLong(LocaTion[i],16);
+//                    lastJSUB = lastJSUB+tmpJSUB;
+//                    LocaTion[i] =Long.toHexString(lastJSUB);
+//                    LocaTion[i]=checkForFourNum(LocaTion[i]);
+//                    System.out.println(LocaTion[i]+Decompose.Operation[i-1]);
+//                    break;
                 default:
-                    long tmp = Long.parseLong(LocaTion[i-1],16);
-                    tmp=tmp+3;
-                    long last = Long.parseLong(LocaTion[i],16);
-                    last = last+tmp;
-                    LocaTion[i] =Long.toHexString(last);
-                    LocaTion[i]=checkForFourNum(LocaTion[i]);
-                    System.out.println(LocaTion[i]);
+                    boolcheckPlus = checkPlus(Decompose.Operation[i-1]);
+                    if(boolcheckPlus==true){
+                        long tmp = Long.parseLong(LocaTion[i-1],16);
+                        tmp=tmp+4;
+                        long last = Long.parseLong(LocaTion[i],16);
+                        last = last+tmp;
+                        LocaTion[i] =Long.toHexString(last);
+                        LocaTion[i]=checkForFourNum(LocaTion[i]);
+                        System.out.println(LocaTion[i]);
+                        boolcheckPlus = false;
+                    }else {
+                        long tmp = Long.parseLong(LocaTion[i - 1], 16);
+                        tmp = tmp + 3;
+                        long last = Long.parseLong(LocaTion[i], 16);
+                        last = last + tmp;
+                        LocaTion[i] = Long.toHexString(last);
+                        LocaTion[i] = checkForFourNum(LocaTion[i]);
+                        System.out.println(LocaTion[i]);
+                    }
 //                    if(findfault==1){
 //                        System.out.println(LocaTion[i-4]+"**");
 //                        findfault=0;
@@ -129,6 +151,7 @@ public class Loc {
                 break;
             }
         }
+        Final(LocaTion);
 //        for(i=0;i<100;i++) {
 
 //            switch (Decompose.Operation[i]) {
@@ -195,7 +218,26 @@ public class Loc {
         }
         return test;
     }
+    public static boolean checkPlus(String plustest){
+        String temporary="";
+        if(plustest!="") {
+            temporary = plustest.substring(0, 1);
+        }
+        if(temporary.equals("+")){
+//            System.out.println("This has plus");
+            return true;
+        }else {
+            return false;
+        }
+    }
 
+    public static void Final(String Location[]){
+        int i = 0;
+        System.out.println("-----------------------------------");
+        for(i=0;i<55;i++){
+            System.out.println(Location[i]);
+        }
+    }
 
 
 }
