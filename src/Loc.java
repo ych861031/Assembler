@@ -10,7 +10,7 @@ public class Loc {
 
     public void setLoc() {
 
-        int findfault=0;
+//        int findfault=0;
         int x;
         for(x=0;x<100;x++) {
             LocaTion[x] ="0000";
@@ -63,7 +63,7 @@ public class Loc {
                         LocaTion[i] =Long.toHexString(last);
                         LocaTion[i] =checkForFourNum(LocaTion[i]);
                         System.out.println(LocaTion[i]+"---"+ascii);
-                        findfault = 1;
+//                        findfault = 1;
 
                     }else if(b.equals("X")){
                         String Xcontent = a.substring(2,a.length()-1);
@@ -79,10 +79,25 @@ public class Loc {
                     break;
 //                case "WORD":
 //                    break;
-//                case "RESB":
-//                    break;
-//                case "RESW":
-//                    break;
+                case "RESB":
+                    long tempResb = Long.parseLong(Decompose.Operend[i-1],10);//radix轉10進位
+                    long PreRowResb  = Long.parseLong(LocaTion[i-1],16);
+                    long mergeResb  = tempResb + PreRowResb ;
+
+                    LocaTion[i] = Long.toHexString(mergeResb );
+                    LocaTion[i] = checkForFourNum(LocaTion[i]);
+                    System.out.println(LocaTion[i]);
+                    break;
+                case "RESW":
+                    long tempResW  = Long.parseLong(Decompose.Operend[i-1],10);//radix轉10進位
+                    long PreRowResW  = Long.parseLong(LocaTion[i-1],16);
+                    long merge = tempResW  *3 + PreRowResW  ;
+
+                    LocaTion[i] = Long.toHexString(merge);
+                    LocaTion[i] = checkForFourNum(LocaTion[i]);
+                    System.out.println(LocaTion[i]);
+
+                    break;
                 case "END":
                     break;
                 default:
@@ -93,10 +108,10 @@ public class Loc {
                     LocaTion[i] =Long.toHexString(last);
                     LocaTion[i]=checkForFourNum(LocaTion[i]);
                     System.out.println(LocaTion[i]);
-                    if(findfault==1){
-                        System.out.println(LocaTion[i-4]+"**");
-                        findfault=0;
-                    }
+//                    if(findfault==1){
+//                        System.out.println(LocaTion[i-4]+"**");
+//                        findfault=0;
+//                    }
                     break;
             }
             if (Decompose.Operation[i].equals("END") ){
