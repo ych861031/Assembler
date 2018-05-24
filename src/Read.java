@@ -8,11 +8,12 @@ public class Read {
 
     public FileReader fileReader;
     public String[] Lines;
+    public static int lines;
     public void read() throws IOException {
         String path = "SRCFIL2.txt";
         fileReader = new FileReader(path);
 
-        int lines = count();
+        lines = count();
         Lines = new String[lines];
 
         fileReader = new FileReader(path);

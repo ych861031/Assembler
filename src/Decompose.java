@@ -1,6 +1,7 @@
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 
 public class Decompose {
 
@@ -48,7 +49,10 @@ public class Decompose {
             String operation="";
 
             try{
-                for (int j=7;j<15;j++){
+                if (Lines[i].charAt(7)=='+'){
+                    operation = "+";
+                }
+                for (int j=8;j<15;j++){
                     char c = Lines[i].charAt(j);
                     if (!String.valueOf(c).equals(" ")){
                         operation = operation+c;
@@ -63,7 +67,10 @@ public class Decompose {
           //operend
             String operend = "";
             try{
-                for (int j=15;j<23;j++){
+                if (Lines[i].charAt(15)=='#'||Lines[i].charAt(15)=='@'){
+                    operend = String.valueOf(Lines[i].charAt(15));
+                }
+                for (int j=16;j<24;j++){
                     char c = Lines[i].charAt(j);
                     if (!String.valueOf(c).equals(" ")){
                         operend = operend + c;
@@ -79,9 +86,6 @@ public class Decompose {
                 continue;
             }
             Operend[i] = operend;
-
-
-
             //comments
             try{
                 char c = Lines[i].charAt(26);
@@ -94,6 +98,8 @@ public class Decompose {
         }
 
 
+
+
 //        可忽略,查看分解除來的
 //        System.out.println("Look Label...");
 //        for (int k=0;k<Label.length;k++){
@@ -101,7 +107,7 @@ public class Decompose {
 //                System.out.println(k+ " " + Label[k]);
 //            }
 //        }
-////
+//////
 //        System.out.println("Look Operation...");
 //        for (int k=0;k<Operation.length;k++){
 //            if (Operation[k]!=null){
