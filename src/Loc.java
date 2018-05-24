@@ -52,12 +52,31 @@ public class Loc {
                             ascii = ascii+Integer.toHexString(temp);
                         }
 
-                        System.out.println(Decompose.Operend[i-1]);
+//                        System.out.println(Decompose.Operend[i-1]);
 
-                        System.out.println(BeforeAscii+"---"+ascii);
+//                        System.out.println(BeforeAscii+"---"+ascii);
+                        long tmp = Long.parseLong(LocaTion[i-1],16);
+                        tmp=tmp+ascii.length()/2;
+                        long last = Long.parseLong(LocaTion[i],16);
+                        last = last+tmp;
+                        LocaTion[i] =Long.toHexString(last);
+                        while(LocaTion[i].length()<4){
+                            LocaTion[i]="0"+LocaTion[i];
+                        }
+                        System.out.println(LocaTion[i]+"---"+ascii);
 
                     }else if(b.equals("X")){
-                        System.out.println(a.substring(2,a.length()-1));
+                        String Xcontent = a.substring(2,a.length()-1);
+//                        System.out.println(Xcontent);
+                        long tmp = Long.parseLong(LocaTion[i-1],16);
+                        tmp=tmp+ Xcontent.length()/2;
+                        long last = Long.parseLong(LocaTion[i],16);
+                        last = last+tmp;
+                        LocaTion[i] =Long.toHexString(last);
+                        while(LocaTion[i].length()<4){
+                            LocaTion[i]="0"+LocaTion[i];
+                        }
+                        System.out.println(LocaTion[i]+"---");
                     }
                     break;
                 case "WORD":
@@ -69,6 +88,15 @@ public class Loc {
                 case "END":
                     break;
                 default:
+                    long tmp = Long.parseLong(LocaTion[i-1],16);
+                    tmp=tmp+3;
+                    long last = Long.parseLong(LocaTion[i],16);
+                    last = last+tmp;
+                    LocaTion[i] =Long.toHexString(last);
+                    while(LocaTion[i].length()<4){
+                        LocaTion[i]="0"+LocaTion[i];
+                    }
+                    System.out.println(LocaTion[i]);
                     break;
             }
             if (Decompose.Operation[i].equals("END") ){

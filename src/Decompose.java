@@ -102,12 +102,12 @@ public class Decompose {
 //            }
 //        }
 ////
-        System.out.println("Look Operation...");
-        for (int k=0;k<Operation.length;k++){
-            if (Operation[k]!=null){
-                System.out.println(k+":"+Operation[k]);
-            }
-        }
+//        System.out.println("Look Operation...");
+//        for (int k=0;k<Operation.length;k++){
+//            if (Operation[k]!=null){
+//                System.out.println(k+":"+Operation[k]);
+//            }
+//        }
 
 //        System.out.println("Look Operend...");
 //        for (int k=0;k<Operend.length;k++){
