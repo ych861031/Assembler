@@ -37,23 +37,14 @@ public class Loc {
 //                    String tmp = Integer.toString(ascii);
 //                    int temp = Integer.valueOf(tmp);
 //                    tmp = Integer.toHexString(temp);
-//                    int j;
-//                    String ascii="";
-//                    for(j=0;j<BeforeAscii.length();j++){
-//                        int temp = (int)BeforeAscii.charAt(j);
-//                        ascii = ascii+Integer.toHexString(temp);
-//                    }
 //
-//                    System.out.println(Decompose.Operend[i-1]);
-//
-//                    System.out.println(BeforeAscii+"---"+ascii);
 
 
                     String b;
-                    b = a.substring(0,1);
+                    b = a.substring(0,1);//取第一個符號
 
+                    //判斷b 是C還是X
                     if (b.equals("C")){
-//                        System.out.println(a.charAt(0)+"...C");
                         int j;
                         String ascii="";
                         for(j=0;j<BeforeAscii.length();j++){
@@ -66,7 +57,7 @@ public class Loc {
                         System.out.println(BeforeAscii+"---"+ascii);
 
                     }else if(b.equals("X")){
-//                        System.out.println("XXX");
+                        System.out.println(a.substring(2,a.length()-1));
                     }
                     break;
                 case "WORD":
