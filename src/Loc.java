@@ -27,7 +27,7 @@ public class Loc {
                 case "START":
                     LocaTion[i]=Decompose.Operend[i-1];
                     LocaTion[i]=checkForFourNum(LocaTion[i]);
-                    System.out.println(LocaTion[i]);
+//                    System.out.println(LocaTion[i]);
                     break;
                 case "BYTE":
                     String a = Decompose.Operend[i-1];
@@ -62,7 +62,7 @@ public class Loc {
                         last = last+tmp;
                         LocaTion[i] =Long.toHexString(last);
                         LocaTion[i] =checkForFourNum(LocaTion[i]);
-                        System.out.println(LocaTion[i]+"---"+ascii);
+//                        System.out.println(LocaTion[i]+"---"+ascii);
 //                        findfault = 1;
 
                     }else if(b.equals("X")){
@@ -74,7 +74,7 @@ public class Loc {
                         last = last+tmp;
                         LocaTion[i] =Long.toHexString(last);
                         LocaTion[i]=checkForFourNum(LocaTion[i]);
-                        System.out.println(LocaTion[i]+"---X");
+//                        System.out.println(LocaTion[i]+"---X");
                     }
                     break;
 //                case "WORD":
@@ -86,7 +86,7 @@ public class Loc {
 
                     LocaTion[i] = Long.toHexString(mergeResb );
                     LocaTion[i] = checkForFourNum(LocaTion[i]);
-                    System.out.println(LocaTion[i]);
+//                    System.out.println(LocaTion[i]);
                     break;
                 case "RESW":
                     long tempResW  = Long.parseLong(Decompose.Operend[i-1],10);//radix轉10進位
@@ -95,7 +95,7 @@ public class Loc {
 
                     LocaTion[i] = Long.toHexString(merge);
                     LocaTion[i] = checkForFourNum(LocaTion[i]);
-                    System.out.println(LocaTion[i]);
+//                    System.out.println(LocaTion[i]);
 
                     break;
                 case "END":
@@ -128,7 +128,7 @@ public class Loc {
                     lastCLEAR = lastCLEAR+tmpCLEAR;
                     LocaTion[i] =Long.toHexString(lastCLEAR);
                     LocaTion[i]=checkForFourNum(LocaTion[i]);
-                    System.out.println(LocaTion[i]);
+//                    System.out.println(LocaTion[i]);
                     break;
                 case "COMPR":
                     long tmpCOMPR = Long.parseLong(LocaTion[i-1],16);
@@ -137,7 +137,16 @@ public class Loc {
                     lastCOMPR= lastCOMPR+tmpCOMPR;
                     LocaTion[i] =Long.toHexString(lastCOMPR);
                     LocaTion[i]=checkForFourNum(LocaTion[i]);
-                    System.out.println(LocaTion[i]);
+//                    System.out.println(LocaTion[i]+"**"+Decompose.Operend[i]+","+Decompose.Operation[i]);
+                    break;
+                case "TIXR":
+                    long tmpTIXR = Long.parseLong(LocaTion[i - 1], 16);
+                    tmpTIXR = tmpTIXR + 2;
+                    long lastTIXR = Long.parseLong(LocaTion[i], 16);
+                    lastTIXR = lastTIXR + tmpTIXR;
+                    LocaTion[i] = Long.toHexString(lastTIXR);
+                    LocaTion[i] = checkForFourNum(LocaTion[i]);
+//                    System.out.println(LocaTion[i]);
                     break;
                 default:
                     boolcheckPlus = checkPlus(Decompose.Operation[i-1]);//需要確認是不是有其他+的可能
@@ -148,7 +157,7 @@ public class Loc {
                         last = last+tmp;
                         LocaTion[i] =Long.toHexString(last);
                         LocaTion[i]=checkForFourNum(LocaTion[i]);
-                        System.out.println(LocaTion[i]);
+//                        System.out.println(LocaTion[i]);
                         boolcheckPlus = false;
                     }else {
                         long tmp = Long.parseLong(LocaTion[i - 1], 16);
@@ -157,7 +166,7 @@ public class Loc {
                         last = last + tmp;
                         LocaTion[i] = Long.toHexString(last);
                         LocaTion[i] = checkForFourNum(LocaTion[i]);
-                        System.out.println(LocaTion[i]);
+//                        System.out.println(LocaTion[i]);
                     }
 //                    if(findfault==1){
 //                        System.out.println(LocaTion[i-4]+"**");
@@ -169,7 +178,7 @@ public class Loc {
                 break;
             }
         }
-        Final(LocaTion);
+        Final(LocaTion);//印出所有LOC
 //        for(i=0;i<100;i++) {
 
 //            switch (Decompose.Operation[i]) {
