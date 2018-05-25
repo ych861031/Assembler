@@ -103,7 +103,8 @@ public class Loc {
                 case "BASE":
                     System.out.println("U need four space");
                     LocaTion[i] = LocaTion[i-1];
-                    LocaTion[i-1] ="    ";
+                    LocaTion[i-1] = LocaTion[i-2];
+
                     break;
 
                 case "":
@@ -262,6 +263,7 @@ public class Loc {
         int i = 0;
         System.out.println("-----------------------------------");
         for(i=0;i<55;i++){
+            Location[i] = Location[i].toUpperCase();//改成大寫
             System.out.println(Location[i]);
         }
     }
