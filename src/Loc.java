@@ -179,7 +179,7 @@ public class Loc {
                 break;
             }
         }
-//        Final(LocaTion);//印出所有LOC
+        changeUpper(LocaTion);//印出所有LOC
 //        for(i=0;i<100;i++) {
 
 //            switch (Decompose.Operation[i]) {
@@ -266,6 +266,14 @@ public class Loc {
             Location[i] = Location[i].toUpperCase();//改成大寫
             System.out.println(Location[i]);
         }
+    }
+    public void changeUpper(String Location[]){
+        int i = 0;
+        for(i=0;i<100;i++){
+            Location[i] = Location[i].toUpperCase();//改成大寫
+
+        }
+
     }
 
 
