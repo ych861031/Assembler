@@ -16,7 +16,11 @@ public class GenerateOpcode {
         for (int i=0;i<Decompose.Operation.length;i++){
             Disp("1000","1006");
         }
+
         System.out.println("!!!" + Disp("001A", "0006") + bits_operation("003","A0",2,"A,S"));
+
+        System.out.println("!!!" + Disp("001A", "0006") + bits_operation("003","48",2,"A,S"));
+
 
     }
 
@@ -62,8 +66,59 @@ public class GenerateOpcode {
 //            }
 //        }
 
+        switch(format){
+            case 1:
+                opcode=opcode;
+                break;
+            case 2:
 
-        return Integer.toBinaryString(bin);
+                String b[] =operend.split(",") ;
+
+                String c[] = new String[2];
+                for(int i=0;i<b.length;i++)
+                {
+                    if(b[i].equals("A")){
+                        c[i]="0";
+                    }if(b[i].equals("X")){
+                        c[i]="1";
+                    }if(b[i].equals("L")){
+                        c[i]="2";
+                    }if(b[i].equals("B")){
+                        c[i]="3";
+                    }if(b[i].equals("S")){
+                        c[i]="4";
+                    }if(b[i].equals("T")){
+                        c[i]="5";
+                    }if(b[i].equals("F")){
+                        c[i]="6";
+                    }if(b[i].equals("PC")){
+                        c[i]="8";
+                    }if(b[i].equals("SW")){
+                        c[i]="9";
+                    }
+
+                }
+                if (c[1]==null){
+                    c[1] = "0";
+                }
+                opcode=opcode+c[0]+c[1];
+                break;
+            case 3:
+                //if(str.startsWith("as"))
+                String d[] ={"1","1","0","0","1","0"};
+                if(operend.charAt(0)=='@'){
+                    d[0]="1";
+                    d[1]="0";
+                }if(operend.charAt(0)=='#'){
+                    d[0]="0";
+                    d[1]="1";
+                }
+            case 4:
+                String d[] ={"1","1","0","0","1","1"};
+        }
+
+
+        return opcode;
     }
 
 
