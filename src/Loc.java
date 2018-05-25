@@ -18,10 +18,10 @@ public class Loc {
         }
 
         int i ;
-        System.out.println(Decompose.Operation[2]);
+//        System.out.println(Decompose.Operation[2]);
         LocaTion[0] = Decompose.Operend[0];
         LocaTion[0]=checkForFourNum(LocaTion[0]);
-        System.out.println(LocaTion[0]);
+//        System.out.println(LocaTion[0]);
         for(i=1;i<100;i++){
             switch (Decompose.Operation[i-1]){
                 case "START":
@@ -101,14 +101,14 @@ public class Loc {
                 case "END":
                     break;
                 case "BASE":
-                    System.out.println("U need four space");
+//                    System.out.println("U need four space");
                     LocaTion[i] = LocaTion[i-1];
                     LocaTion[i-1] = LocaTion[i-2];
 
                     break;
 
                 case "":
-                    System.out.println("this has four space");
+//                    System.out.println("this has four space");
                     LocaTion[i] = LocaTion[i-1];
                     LocaTion[i-1] ="    ";
                     break;
@@ -179,7 +179,7 @@ public class Loc {
                 break;
             }
         }
-        Final(LocaTion);//印出所有LOC
+//        Final(LocaTion);//印出所有LOC
 //        for(i=0;i<100;i++) {
 
 //            switch (Decompose.Operation[i]) {

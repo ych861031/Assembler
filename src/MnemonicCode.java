@@ -1,9 +1,9 @@
 import java.util.HashMap;
 
 public class MnemonicCode {
-    String[] instruction = {"LDA","LDB","LDX","ADD","JSUB","JEQ","STA","J","ADDR","CLEAR","COMPR","SUBR",
-            "TIX","RSUB"};
-    String[] value = {"00","68","04","18","48","30","0C","3C","90","B4","A0","94","2C","4C"};
+    String[] instruction = {"ADD","ADDF","ADDR","AND","","","","","","","","","","","","","","","","","","","","","","","",""};
+
+    String[] value = {"18","58","90","40","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
 
     public HashMap<String,String> hashMap = new HashMap<>();
     public  void setHashMap(){
