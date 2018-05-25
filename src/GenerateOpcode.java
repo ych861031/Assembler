@@ -16,7 +16,7 @@ public class GenerateOpcode {
         for (int i=0;i<Decompose.Operation.length;i++){
             Disp("1000","1006");
         }
-        System.out.println("!!!" + Disp("001A", "0006") + bits_operation("003","48",4));
+        System.out.println("!!!" + Disp("001A", "0006") + bits_operation("003","A0",2,"A,S"));
 
     }
 
@@ -44,7 +44,7 @@ public class GenerateOpcode {
     }
 
     //格式操作
-    public String bits_operation(String disp,String opcode,int format) {
+    public String bits_operation(String disp,String opcode,int format,String operend) {
 
         int bin;
         System.out.println(bin=Integer.parseInt(disp,16));
