@@ -13,10 +13,10 @@ public class GenerateOpcode {
 
     public void generate() {
 
-//        for (int i=0;i<Decompose.Operation.length;i++){
-//            Disp("1000","1006");
-//        }
-        System.out.println("!!!" + Disp("001A", "0006") + bits_operation("003"));
+        for (int i=0;i<Decompose.Operation.length;i++){
+            Disp("1000","1006");
+        }
+        System.out.println("!!!" + Disp("001A", "0006") + bits_operation("003","48",4));
 
     }
 
@@ -44,11 +44,11 @@ public class GenerateOpcode {
     }
 
     //格式操作
-    public String bits_operation(String disp) {
-        String opcode = "";
+    public String bits_operation(String disp,String opcode,int format) {
+
         int bin;
         System.out.println(bin=Integer.parseInt(disp,16));
-        //System.out.println(Integer.toString(bin,2));
+
         String bin_string =  Integer.toBinaryString(bin);
 
         int strLen=disp.length()*4;
