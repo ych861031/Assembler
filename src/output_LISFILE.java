@@ -21,26 +21,38 @@ public class output_LISFILE {
             String opcode ;
             if (!GenerateOpcode.Opcode_test[i].equals("")){
                 opcode = GenerateOpcode.Opcode_test[i];
-                for (int space = GenerateOpcode.Opcode_test[i].length(); space <= 8 ;space++){
+                for (int space = GenerateOpcode.Opcode_test[i].length(); space < 8 ;space++){
                     opcode += " ";
                 }
             }else{
-                opcode = "         ";//" "*8
+                opcode = "        ";//" "*8
+            }
+            String label;
+            if (Decompose.Label[i]==null||Decompose.Label[i].equals("")){
+                label="      ";
+            }else {
+                label = Decompose.Label[i];
+                if (label.length()<6){
+                    for (int space=label.length();space<6;space++){
+                        label+=" ";
+                    }
+                }
             }
 
+
             String operation;
-            if (Decompose.Operation[i]==null||Decompose.Operation.equals("")){
+            if (Decompose.Operation[i]==null||Decompose.Operation[i].equals("")){
                 operation = "      ";//" "*6
             }else{
                 if ((Decompose.Operation[i].charAt(0) =='+')){
                     operation = Decompose.Operation[i];
                 }else{
-//                    System.out.println(i+"!");
+
                     operation = " "+Decompose.Operation[i];
                 }
 
-                if (operation.length()<=6){
-                    for (int space = operation.length();space<=6;space++){
+                if (operation.length()<6){
+                    for (int space = operation.length();space<6;space++){
                         operation +=" ";
                     }
                 }
@@ -56,8 +68,8 @@ public class output_LISFILE {
                     operend = " "+Decompose.Operend[i];
                 }
 
-                if (operend.length()<=12){
-                    for (int space = operend.length();space<=12;space++){
+                if (operend.length()<12){
+                    for (int space = operend.length();space<12;space++){
                         operend+=" ";
                     }
                 }
@@ -68,8 +80,8 @@ public class output_LISFILE {
             if (Decompose.Comments[i]!=null){
                 comments = Decompose.Comments[i];
             }
-//            fr.write(Loc.locTest[i]+" "  + opcode + " " + operation + " "+ operend +" "+ comments +"\n");
-            fr.write(Loc.LocaTion[i]+" "  + opcode + " " + operation + " "+ operend +" "+ comments +"\n");
+
+            fr.write(Loc.LocaTion[i]+ " "  + opcode + " " +label+ " " + operation + " "+ operend +" "+ comments +"\n");
 
             illegal_test illegal = new illegal_test();
 

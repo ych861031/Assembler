@@ -36,9 +36,8 @@ public class Main {
         output_LISFILE.output();
         output_OBJFILE.output();
 
-        MnemonicCode mnemonicCode1 = new MnemonicCode();
 
-        System.out.println(mnemonicCode.hashMap.get("JSUB"));
+//        System.out.println(Decompose.Operation.length);
 
 
 

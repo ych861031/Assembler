@@ -32,15 +32,11 @@ public class MnemonicCode {
             ,"F8","2C","B8","DC"     //12
     };
 
-    public HashMap<String,String> hashMap = new HashMap<>();
+    public static HashMap<String,String> hashMap = new HashMap<>();
     public  void setHashMap(){
         for (int i=0;i<instruction.length;i++){
-            this.hashMap.put(instruction[i],value[i]);
+            hashMap.put(instruction[i],value[i]);
         }
     }
 
-
-    public String getValue(String key){
-        return hashMap.get(key);
-    }
 }
