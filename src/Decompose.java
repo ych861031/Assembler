@@ -49,8 +49,8 @@ public class Decompose {
             String operation="";
 
             try{
-                if (Lines[i].charAt(7)=='+'){
-                    operation = "+";
+                if (Lines[i].charAt(7)=='+'||Lines[i].charAt(7)=='='){
+                    operation = String.valueOf(Lines[i].charAt(7));
                 }
                 for (int j=8;j<15;j++){
                     char c = Lines[i].charAt(j);
