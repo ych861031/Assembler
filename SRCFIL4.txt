@@ -20,5 +20,4 @@ LENGTH  RESW    1        LENGTH OF RECORD
 X       RESB    4096     4096-BYTE BUFFER AREA
 Y       EQU     *
 MAXLEN  EQU     Y-X      MAXIMUM RECORD LENGTH
-
         END     FIRST

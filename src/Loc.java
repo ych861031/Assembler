@@ -116,15 +116,21 @@ public class Loc {
                     break;
                 case "EQU":
                     String tmpEQU = Decompose.Operend[i-1];
-                    System.out.println(tmpEQU+"\"\"");
+//                    System.out.println(tmpEQU+"\"\"");
                     int EQUi=0;
                     for(EQUi=0;EQUi<tmpEQU.length();EQUi++){
-                        char checktest;//找四則運算符號
+                        char checktest;//抓字元進搜尋
                         checktest = tmpEQU.charAt(EQUi);
-                        System.out.println(checktest+"%@#^*(");
-//                        if(checktest!=null){
-//
-////                        }
+                        //找四則運算符號
+                        if(checktest=='-'){
+                            //找到後 拿前後計算用變數名稱
+                            String astring = tmpEQU.substring(0,EQUi);
+                            String bstring = tmpEQU.substring(EQUi+1,tmpEQU.length());
+                            System.out.println(astring+"..."+bstring);
+                            FindLoc(astring);
+
+                            FindLoc(bstring);
+                        }
                     }
                     break;
                 case "LTORG":
@@ -142,9 +148,10 @@ public class Loc {
                         LocaTion[i] = Long.toHexString(last);
                         LocaTion[i] = checkForFourNum(LocaTion[i]);
                         boolcheckPlus = false;
-                    } else if (boolcheckEqualSign == true) {
-                        String contentEx = "";
-                        contentEx = Decompose.Operend[i - 1].substring(2, Decompose.Operend[i - 1].length() - 1);//取C'EOF'
+                    } else if(boolcheckEqualSign == true) {
+                        String contentEx = "123\"";
+                        contentEx = Decompose.Operation[i-1] ;
+                        contentEx = contentEx.substring(3,Decompose.Operation[i-1].length()-1);//取C'EOF'
                         System.out.println(contentEx+"222");
 
 
@@ -166,6 +173,7 @@ public class Loc {
         }
         changeUpper(LocaTion);//改成大寫
 //        Final(LocaTion);
+
 
     }
 
@@ -192,9 +200,10 @@ public class Loc {
     public boolean checkEqualSign(String signtest) {
 
         String temporary="";
-//        System.out.println(signtest);
+        System.out.println(signtest+"00000");
         if(signtest!="") {
             temporary = signtest.substring(0, 1);
+            System.out.println(temporary);
         }
         if(temporary.equals("=")){
             return true;
@@ -221,5 +230,23 @@ public class Loc {
 
     }
 
+    public void FindLoc(String a){
+        System.out.println(a);
+        int k;
+        for(k=0;k<Decompose.Label.length;k++){
+//            System.out.println(Decompose.Label[i]+a);
+            String test = Decompose.Label[k];
+
+            if(Decompose.Label[k]!=null){
+                if(test.equals(a)){
+                    System.out.println(LocaTion[k]);
+                    System.out.println(k);
+                }
+            }else{
+                break;
+            }
+        }
+
+    }
 
 }
