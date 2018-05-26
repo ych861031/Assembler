@@ -21,14 +21,16 @@ public class Decompose {
         Comments = new String[100];
 
 
+        int k=-1;//save index all save was change
 
         for (int i=0;i<Lines.length;i++){
+            k++;
             char dot = Lines[i].charAt(0);
             if (dot == '.'){
-                Annotaion.put(i,Lines[i]);
-                Label[i] = "";
-                Operation[i] = "";
-                Operend[i] = "";
+                Annotaion.put(i,Lines[k]);
+                Label[k] = "";
+                Operation[k] = "";
+                Operend[k] = "";
                 continue;
             }
 
@@ -43,13 +45,13 @@ public class Decompose {
                 }
             }
 //            System.out.println(label);
-            Label[i] = label;
+            Label[k] = label;
 
             //opeation
             String operation="";
 
             try{
-                if (Lines[i].charAt(7)=='+'||Lines[i].charAt(7)=='='){
+                if (Lines[i].charAt(7)=='+'){
                     operation = String.valueOf(Lines[i].charAt(7));
                 }
                 for (int j=8;j<15;j++){
@@ -58,33 +60,51 @@ public class Decompose {
                         operation = operation+c;
                     }
                 }
-            }catch (Exception e){ Operation[i] = operation;
+            }catch (Exception e){
+                Operation[k] = operation;
+                if (Operation[k].equals("LTORG")){
+                    Label[k] = "";
+                    Operend[k] = "";
+                    Comments[k] = "";
+                    int j;
+                    for (j=0;j<i;j++){
+                        if (Decompose.Operend[j].charAt(0)=='='){
+                            break;
+                        }
+                    }
+                    ++k;
+                    Label[k] = "*";
+                    Operation[k] = Operend[j];
+                    Operend[k] = "";
+                    Comments[k] = "";
+                }
                 continue;
             }
 //            System.out.println(operation);
-            Operation[i] = operation;
+            Operation[k] = operation;
 
-            if (operation.equals("LTORG")){
-                Label[i] = "";
-                Operend[i] = "";
-                Comments[i] = "";
+            Operation[k] = operation;
+            if (Operation[k].equals("LTORG")){
+                Label[k] = "";
+                Operend[k] = "";
+                Comments[k] = "";
                 int j;
                 for (j=0;j<i;j++){
-                    if (Decompose.Operend[i].charAt(0)=='='){
+                    if (Decompose.Operend[j].charAt(0)=='='){
                         break;
                     }
                 }
-                i+=1;
-                Label[i] = "*";
-                Operation[i] = Operation[j];
-                Operend[i] = "";
-                Comments[i] = "";
-
+                ++k;
+                Label[k] = "*";
+                Operation[k] = Operend[j];
+                Operend[k] = "";
+                Comments[k] = "";
+                continue;
             }
           //operend
             String operend = "";
             try{
-                if (Lines[i].charAt(15)=='#'||Lines[i].charAt(15)=='@'){
+                if (Lines[i].charAt(15)=='#'||Lines[i].charAt(15)=='@'||Lines[i].charAt(15)=='='){
                     operend = String.valueOf(Lines[i].charAt(15));
                 }
                 for (int j=16;j<24;j++){
@@ -99,15 +119,15 @@ public class Decompose {
             }catch (Exception e){
                 //無compoment時寫法
 //                System.out.println(operend);
-                Operend[i] = operend;
+                Operend[k] = operend;
                 continue;
             }
-            Operend[i] = operend;
+            Operend[k] = operend;
             //comments
             try{
                 char c = Lines[i].charAt(26);
                 if (!String.valueOf(c).equals(" ")){
-                    Comments[i] = Lines[i].substring(25,Lines[i].length());
+                    Comments[k] = Lines[i].substring(25,Lines[i].length());
                 }
             }catch (Exception e){
                 continue;
@@ -125,12 +145,12 @@ public class Decompose {
 //            }
 //        }
 //////
-        System.out.println("Look Operation...");
-        for (int k=0;k<Operation.length;k++){
-            if (Operation[k]!=null){
-                System.out.println(k+":"+Operation[k]);
-            }
-        }
+//        System.out.println("Look Operation...");
+//        for (int z=0;z<Operation.length;z++){
+//            if (Operation[z]!=null){
+//                System.out.println(z+":"+Operation[z]);
+//            }
+//        }
 
 //        System.out.println("Look Operend...");
 //        for (int k=0;k<Operend.length;k++){
