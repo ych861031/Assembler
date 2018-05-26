@@ -114,6 +114,19 @@ public class Loc {
                     LocaTion[i] = Long.toHexString(lastTIXR);
                     LocaTion[i] = checkForFourNum(LocaTion[i]);
                     break;
+                case "EQU":
+                    String tmpEQU = Decompose.Operend[i-1];
+                    System.out.println(tmpEQU+"\"\"");
+                    int EQUi=0;
+                    for(EQUi=0;EQUi<16;i++){
+                        char checktest;//找四則運算符號
+                        checktest = tmpEQU.charAt(EQUi);
+                        System.out.println(checktest);
+//                        if(checktest!=null){
+//
+//                        }
+                    }
+                    break;
                 case "LTORG":
                     LocaTion[i] = LocaTion[i - 1];
                     LocaTion[i - 1] = LocaTion[i - 2];
@@ -179,7 +192,7 @@ public class Loc {
     public boolean checkEqualSign(String signtest) {
 
         String temporary="";
-        System.out.println(signtest);
+//        System.out.println(signtest);
         if(signtest!="") {
             temporary = signtest.substring(0, 1);
         }
