@@ -34,6 +34,21 @@ public class GenerateOpcode {
                     Opcode[i] = "";
                     continue;
                 }
+                if (Decompose.Operation[i].equals("BYTE")){
+                    if (Decompose.Operend[i].charAt(0)=='C'){
+                        String split = Decompose.Operend[i].substring(2,Decompose.Operend[i].length()-1);
+                        Opcode[i] = "";
+                        for (int j=0;j<split.length();j++){
+//                           System.out.println(Integer.toHexString((int)split.charAt(j)).toUpperCase());
+                           Opcode[i] += Integer.toHexString((int)split.charAt(j)).toUpperCase();
+                        }
+                        continue;
+                    }else {
+                        String split = Decompose.Operend[i].substring(2,Decompose.Operend[i].length()-1);
+                        Opcode[i] = split;
+                        continue;
+                    }
+                }
                 if (Decompose.Operation[i].equals("RSUB")){
                     Opcode[i] = "4F0000";
                     continue;
@@ -98,8 +113,8 @@ public class GenerateOpcode {
                     target = Sytab.hashMap.get(Decompose.Operend[i].substring(1,Decompose.Operend[i].length()));
                     if (target==null){
                         try {
-                            Integer.parseInt(target);
-                            String a = target;
+                            Integer.parseInt(Decompose.Operend[i].substring(1,Decompose.Operend[i].length()));
+                            String a = Decompose.Operend[i].substring(1,Decompose.Operend[i].length());
                             for (int j=a.length();j<=4;j++){
                                 a="0"+a;
                             }
@@ -119,6 +134,12 @@ public class GenerateOpcode {
                         Opcode[i] = bits_operation(Disp(location_next,target),MnemonicCode.hashMap.get(Decompose.Operation[i]),3,Decompose.Operend[i]);
                         continue;
                     }else{
+                        if (Decompose.Operend[i].contains(",")){
+                            String[] split =Decompose.Operend[i].split(",");
+                            target = Sytab.hashMap.get(split[0]);
+                            Opcode[i] = bits_operation(Disp(location_next,target),MnemonicCode.hashMap.get(Decompose.Operation[i]),3,split[0]);
+                            continue;
+                        }
                         Opcode[i] = "";
                         illegal_test.hashMap.put(i,"Operend not found");
                         continue;

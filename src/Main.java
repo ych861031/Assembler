@@ -35,8 +35,10 @@ public class Main {
 
         output_LISFILE.output();
         output_OBJFILE.output();
-
-
+//        String split = "EOF";
+//        for (int j=0;j<split.length();j++){
+//            System.out.print(Integer.toHexString((int)split.charAt(j)).toUpperCase());
+//        }
 //        System.out.println(Decompose.Operation.length);
 
 
