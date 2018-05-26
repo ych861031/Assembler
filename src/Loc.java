@@ -118,14 +118,14 @@ public class Loc {
                     String tmpEQU = Decompose.Operend[i-1];
                     System.out.println(tmpEQU+"\"\"");
                     int EQUi=0;
-//                    for(EQUi=0;EQUi<16;i++){
-//                        char checktest;//找四則運算符號
-//                        checktest = tmpEQU.charAt(EQUi);
-//                        System.out.println(checktest);
-////                        if(checktest!=null){
-////
+                    for(EQUi=0;EQUi<tmpEQU.length();EQUi++){
+                        char checktest;//找四則運算符號
+                        checktest = tmpEQU.charAt(EQUi);
+                        System.out.println(checktest+"%@#^*(");
+//                        if(checktest!=null){
+//
 ////                        }
-//                    }
+                    }
                     break;
                 case "LTORG":
                     LocaTion[i] = LocaTion[i - 1];
