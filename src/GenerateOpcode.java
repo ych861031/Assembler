@@ -181,18 +181,17 @@ public class GenerateOpcode {
     public String bits_operation(String disp,String opcode,int format,String operend) {
 
 //        System.out.println(disp+","+opcode+","+format+","+operend);
-
-
 //        int bin;
-//        bin=Integer.parseInt(disp,16);
+//       bin=Integer.parseInt(disp,16);
 //
 //
-//        String bin_string =  Integer.toBinaryString(bin);
+//       String bin_string =  disp;
 //
-//        int strLen=disp.length()*4;
-//        for (int i =bin_string.length();i<strLen;i++){
-//            bin_string ="0"+bin_string;
-//        }
+//      //  int strLen=disp.length()*4;
+//       for (int i =bin_string.length();i<3;i++){
+//           bin_string ="0"+bin_string;
+//      }
+
 //        System.out.println(bin_string);
 
 
@@ -229,7 +228,16 @@ public class GenerateOpcode {
                     c[1] = "0";
                 }
                 opcode=opcode+c[0]+c[1];
-                break;
+                int opcode_1_1=Integer.parseInt(opcode,16);
+                String opcode_2_1=Integer.toBinaryString(opcode_1_1);
+                String object_code_2= opcode_2_1;
+
+                String final_2 =Integer.toHexString(Integer.parseInt(object_code_2,2));
+                for(int i=final_2.length();i<4;i++){
+                    final_2="0"+final_2;
+                }
+                System.out.println(final_2.toUpperCase());
+                return final_2.toUpperCase();
             case 3:
                 System.out.println("format 3");
                 //if(str.startsWith("as"))
@@ -238,17 +246,105 @@ public class GenerateOpcode {
                     d[0]="1";
                     d[1]="0";
                 }if(operend.charAt(0)=='#'){
-                    d[0]="0";
-                    d[1]="1";
+                d[0]="0";
+                d[1]="1";
+                }if(operend.contains("X")){
+                d[2]="1";
                 }
-                break;
+                int j;
+                for(j=0;j<Decompose.Operation.length;j++){
+                    if(Decompose.Operend[j].equals(operend)){
+                        break;
+                    }
+                }
+                if(Decompose.Operation[j+1].equals("BASE")){
+                    d[3]="1";
+                    d[4]="0";
+                }
+                String set_3=d[0]+d[1]+d[2]+d[3]+d[4]+d[5];
+                int opcode_1_2=Integer.parseInt(opcode,16);
+
+                String opcode_2_2=Integer.toBinaryString(opcode_1_2);
+                int strLen_2=opcode.length()*4;
+                for (int i =opcode_2_2.length();i<strLen_2;i++){
+                    opcode_2_2 ="0"+opcode_2_2;
+                }
+                //System.out.println(opcode_2_2);
+                String object_code_3= opcode_2_2.substring(0,6)+set_3;
+
+                int bin_1;
+                bin_1=Integer.parseInt(disp,16);
+
+
+                String bin_string_1 =  disp;
+
+                //  int strLen=disp.length()*4;
+                for (int i =bin_string_1.length();i<3;i++){
+                    bin_string_1 ="0"+bin_string_1;
+                }
+                String final_3 =Integer.toHexString(Integer.parseInt(object_code_3,2))+bin_string_1;
+                for(int i=final_3.length();i<6;i++){
+                    final_3="0"+final_3;
+                }
+
+                System.out.println(final_3.toUpperCase());
+                return final_3.toUpperCase();
+
             case 4:
                 System.out.println("format 4");
-                String[] e = {"1","1","0","0","1","1"};
+                String[] e = {"1","1","0","0","0","1"};
+                if(operend.charAt(0)=='@'){
+                    e[0]="1";
+                    e[1]="0";
+                }if(operend.charAt(0)=='#'){
+                e[0]="0";
+                e[1]="1";
+                }if(operend.contains("X")){
+                    e[2]="1";
+                }
+                int k;
+                for(k=0;k<Decompose.Operation.length;k++){
+                    if(Decompose.Operend[k].equals(operend)){
+                        break;
+                    }
+                }
+                if(Decompose.Operation[k+1].equals("BASE")){
+                    e[3]="1";
+                    e[4]="0";
+                }
+                String set_4=e[0]+e[1]+e[2]+e[3]+e[4]+e[5];
+                int opcode_1_3=Integer.parseInt(opcode,16);
+                String opcode_2_3=Integer.toBinaryString(opcode_1_3);
+
+                int strLen_3=opcode.length()*4;
+                for (int i =opcode_2_3.length();i<strLen_3;i++){
+                    opcode_2_3 ="0"+opcode_2_3;
+                }
+                String object_code_4= opcode_2_3.substring(0,6)+set_4;
+
+
+                int bin_2;
+                bin_2=Integer.parseInt(disp,16);
+
+
+                String bin_string_2 =  disp;
+
+                //  int strLen=disp.length()*4;
+                for (int i =bin_string_2.length();i<5;i++){
+                    bin_string_2 ="0"+bin_string_2;
+                }
+                String final_4 =Integer.toHexString(Integer.parseInt(object_code_4,2))+bin_string_2;
+                for(int i=final_4.length();i<8;i++){
+                    final_4="0"+final_4;
+                }
+                System.out.println(final_4.toUpperCase());
+                return final_4.toUpperCase();
         }
 
 
-        return opcode;
+
+
+        return "";
     }
     }
 
