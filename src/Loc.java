@@ -200,10 +200,10 @@ public class Loc {
     public boolean checkEqualSign(String signtest) {
 
         String temporary="";
-        System.out.println(signtest+"00000");
+//        System.out.println(signtest+"00000");
         if(signtest!="") {
             temporary = signtest.substring(0, 1);
-            System.out.println(temporary);
+//            System.out.println(temporary);
         }
         if(temporary.equals("=")){
             return true;
