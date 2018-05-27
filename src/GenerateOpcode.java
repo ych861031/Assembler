@@ -26,6 +26,9 @@ public class GenerateOpcode {
 
         for (int i=0;i<Read.lines;i++){
 //            System.out.println(i+":"+MnemonicCode.hashMap.get(Decompose.Operation[i]));
+            if (Decompose.Operation[i].equals("LTORG")){
+                continue;
+            }
 
             if (Decompose.Operation[i].length() > 0){
                 if (Decompose.Operation[i].equals("BASE")||Decompose.Operation[i].equals("START")||
@@ -137,7 +140,7 @@ public class GenerateOpcode {
                         if (Decompose.Operend[i].contains(",")){
                             String[] split =Decompose.Operend[i].split(",");
                             target = Sytab.hashMap.get(split[0]);
-                            Opcode[i] = bits_operation(Disp(location_next,target),MnemonicCode.hashMap.get(Decompose.Operation[i]),3,split[0]);
+                            Opcode[i] = bits_operation(Disp(location_next,target),MnemonicCode.hashMap.get(Decompose.Operation[i]),3,Decompose.Operation[i]);
                             continue;
                         }
                         Opcode[i] = "";

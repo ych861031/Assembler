@@ -11,6 +11,7 @@ public class Decompose {
     public static String[] Comments;
     public static HashMap<Integer,String> Annotaion = new HashMap<>();
     public static ArrayList Ann = new ArrayList();
+    public static int k;
 
     public void decompose(String[] Lines){
 
@@ -20,8 +21,7 @@ public class Decompose {
         Operend = new String[100];
         Comments = new String[100];
 
-
-        int k=-1;//save index all save was change
+        k=-1;//save index all save was change
 
         for (int i=0;i<Lines.length;i++){
             k++;

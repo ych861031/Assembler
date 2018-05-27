@@ -11,78 +11,100 @@ public class output_OBJFILE {
         //ex: File ... = new file;
 
         //基本上就是按照規則把opcode 輸出到檔案上
+        int length = Decompose.k;
 
-        FileWriter obj=new FileWriter("obj.txt") ;
+        FileWriter obj=new FileWriter("OBJFILE.txt") ;
+
+        String name = Decompose.Label[0];//程式名稱
 
 
-
-        String name = Decompose.Label[0];
-
-        int i,j;
         obj.write("H");
+        for (int i=name.length();i<6;i++){
+            name=name+" ";
+        }
+        String start=Loc.LocaTion[0];//程式起始位置
 
-        Loc.locTest[0].length();
-        String a="";
-
-
-
-        for(i=Loc.locTest[0].length();i<6;i++)
+        for(int i=start.length();i<6;i++)
         {
-            a=a+"0";
+            start="0"+start;
         }
 
-       obj.write(name+"  "+a+Loc.locTest[0]);
-
-        a="";
-        for(i=Loc.locTest[Loc.locTest.length-1].length();i<6;i++)
+        String endLocation=Loc.LocaTion[length];//程式結尾
+        for(int i=endLocation.length();i<6;i++)
         {
-            a=a+"0";
+            endLocation= "0"+endLocation;
         }
+        obj.write(name+start+endLocation+"\n");//第一行
 
-        a="";
-        obj.write(a+Loc.locTest[Loc.locTest.length-1]+"\n");
-        obj.write("T");
-        for(i=Loc.locTest[1].length();i<6;i++)
-        {
-            a=a+"0";
+        //T列處理
+        String[] T_Line = new String[100];
+        String[] T_Start = new String[100];
+        for (int i=0;i<100;i++){
+            T_Line[i] = "";
         }
-        a="";
-        obj.write(a+Loc.locTest[1]);
-        int b=0;
-        String c=" ";
-        for(i=0;i<GenerateOpcode.Opcode_test.length;i++)
-        {
-
-            b+=GenerateOpcode.Opcode_test[i].length();
-
-            if(b<=58)
-            {
-                obj.write(GenerateOpcode.Opcode_test[i]); //放了58個字母進去
-
-
-            }
-            c+=GenerateOpcode.Opcode_test[GenerateOpcode.Opcode_test[i].length()];
-            }
-            obj.write("\n"+"T");
-        for(i=Loc.locTest[1].length();i<6;i++)
-        {
-            a=a+"0";
-        }
-        obj.write(a+Loc.locTest[11]);
-            b=0;
-
-
-        for(i=0;i<GenerateOpcode.Opcode_test.length;i++)
-        {
-
-            b+=GenerateOpcode.Opcode_test[i].length();
-
-            if(b<=38)
-            {
-                obj.write(GenerateOpcode.Opcode_test[i]); //放了87個字母進去
-
+        int T_Length=0;
+        for (int i=0;i<length;i++){
+            if (Decompose.Operation[i].equals("RESW")||Decompose.Operation[i].equals("RESB")){
+                if (!T_Line[T_Length].equals("")){
+                    System.out.println("!");
+                    T_Length++;
+                }
+            }else{
+                if (T_Line[T_Length].length() + GenerateOpcode.Opcode_test[i].length()<=58){
+                    T_Line[T_Length]+=GenerateOpcode.Opcode_test[i];
+                }else{
+                    T_Length++;
+                    T_Line[T_Length]+=GenerateOpcode.Opcode_test[i];
+                }
             }
         }
+        for (int i=0;i<T_Line.length&&!(T_Line[i].equals(""));i++){
+            System.out.println(T_Line[i]);
+        }
+//        a="";
+//        obj.write(a+Loc.locTest[Loc.locTest.length-1]+"\n");
+//        obj.write("T");
+//        for(i=Loc.locTest[1].length();i<6;i++)
+//        {
+//            a=a+"0";
+//        }
+//        a="";
+//        obj.write(a+Loc.locTest[1]);
+//        int b=0;
+//        String c=" ";
+//        for(i=0;i<GenerateOpcode.Opcode_test.length;i++)
+//        {
+//
+//            b+=GenerateOpcode.Opcode_test[i].length();
+//
+//            if(b<=58)
+//            {
+//                obj.write(GenerateOpcode.Opcode_test[i]); //放了58個字母進去
+//
+//
+//            }
+//            c+=GenerateOpcode.Opcode_test[GenerateOpcode.Opcode_test[i].length()];
+//            }
+//            obj.write("\n"+"T");
+//        for(i=Loc.locTest[1].length();i<6;i++)
+//        {
+//            a=a+"0";
+//        }
+//        obj.write(a+Loc.locTest[11]);
+//            b=0;
+//
+//
+//        for(i=0;i<GenerateOpcode.Opcode_test.length;i++)
+//        {
+//
+//            b+=GenerateOpcode.Opcode_test[i].length();
+//
+//            if(b<=38)
+//            {
+//                obj.write(GenerateOpcode.Opcode_test[i]); //放了87個字母進去
+//
+//            }
+//        }
 
 
 
@@ -117,7 +139,7 @@ public class output_OBJFILE {
 
         //    }
 
-
+        obj.write("E"+start);
         obj.flush();
         obj.close();
         }
