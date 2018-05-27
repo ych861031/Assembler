@@ -40,8 +40,7 @@ public class Main {
 //            System.out.print(Integer.toHexString((int)split.charAt(j)).toUpperCase());
 //        }
 //        System.out.println(Decompose.Operation.length);
-
-
+//        illegal_test.hashMap.put(i,"***");
 
     }
 

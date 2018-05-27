@@ -37,7 +37,7 @@ public class output_OBJFILE {
         obj.write(name+start+endLocation+"\n");//第一行
 
         //T列處理
-        String[] T_Line = new String[100];
+        String[] T_Line = new String[100]; //T每列的所有opcode
         String[] T_Start = new String[100];
         for (int i=0;i<100;i++){
             T_Line[i] = "";
@@ -49,111 +49,105 @@ public class output_OBJFILE {
                     T_Length++;
                 }
             }else{
+                //如果換行,還沒紀錄objcode
+                if (T_Line[T_Length].equals("")){
+                    T_Start[T_Length] = GenerateOpcode.Opcode_test[i];
+                }
+                //判斷是否在每行範圍內
                 if (T_Line[T_Length].length() + GenerateOpcode.Opcode_test[i].length()<=58){
                     T_Line[T_Length]+=GenerateOpcode.Opcode_test[i];
                 }else{
                     T_Length++;
                     T_Line[T_Length]+=GenerateOpcode.Opcode_test[i];
+                    T_Start[T_Length]=GenerateOpcode.Opcode_test[i];
                 }
             }
         }
-        for (int i=0;i<T_Line.length&&!(T_Line[i].equals(""));i++){
-            System.out.println(T_Line[i]);
+//        for (int i=0;i<T_Line.length&&!(T_Line[i].equals(""));i++){
+//            System.out.println(T_Line[i]);
+//        }
+//        for (int i=0;i<T_Line.length&&!(T_Line[i].equals(""));i++){
+//            System.out.println(T_Start[i]);
+//        }
+
+        String[] T_Line_Start_Location= new String[T_Length+1];
+        for (int i=0;i<T_Start.length;i++){
+            for (int j=0;j<GenerateOpcode.Opcode_test.length;j++){
+                if (GenerateOpcode.Opcode_test[j].equals(T_Start[i])){
+//                    System.out.println(Loc.LocaTion[j]);
+                    T_Line_Start_Location[i]=Loc.LocaTion[j];
+                    break;
+                }
+            }
         }
-//        a="";
-//        obj.write(a+Loc.locTest[Loc.locTest.length-1]+"\n");
-//        obj.write("T");
-//        for(i=Loc.locTest[1].length();i<6;i++)
-//        {
-//            a=a+"0";
-//        }
-//        a="";
-//        obj.write(a+Loc.locTest[1]);
-//        int b=0;
-//        String c=" ";
-//        for(i=0;i<GenerateOpcode.Opcode_test.length;i++)
-//        {
-//
-//            b+=GenerateOpcode.Opcode_test[i].length();
-//
-//            if(b<=58)
-//            {
-//                obj.write(GenerateOpcode.Opcode_test[i]); //放了58個字母進去
-//
-//
-//            }
-//            c+=GenerateOpcode.Opcode_test[GenerateOpcode.Opcode_test[i].length()];
-//            }
-//            obj.write("\n"+"T");
-//        for(i=Loc.locTest[1].length();i<6;i++)
-//        {
-//            a=a+"0";
-//        }
-//        obj.write(a+Loc.locTest[11]);
-//            b=0;
-//
-//
-//        for(i=0;i<GenerateOpcode.Opcode_test.length;i++)
-//        {
-//
-//            b+=GenerateOpcode.Opcode_test[i].length();
-//
-//            if(b<=38)
-//            {
-//                obj.write(GenerateOpcode.Opcode_test[i]); //放了87個字母進去
-//
-//            }
-//        }
 
+        //Location改為長度必定是6
+        for (int i =0;i<5;i++){
+            for (int j = T_Line_Start_Location[i].length();j<6;j++){
+                T_Line_Start_Location[i] = "0" + T_Line_Start_Location[i];
+            }
+        }
 
+        String[] T_Line_length = new String[T_Length+1];
+        //計算T列每行長度
+        for (int i=0;i<T_Length+1;i++){
+            T_Line_length[i] = Integer.toHexString(T_Line[i].length()/2).toUpperCase();
+        }
+        //objfile.txt T欄
+        for (int i=0;i<T_Length+1;i++){
+            obj.write("T"+T_Line_Start_Location[i]+T_Line_length[i]+T_Line[i]+"\n");
+        }
 
+        String[] M_Line = new String[100];
+        int M_Length=0;
+        //objfile.txt M欄 找出M欄 如+JSUB
+        for (int i=0;i<Decompose.Operation.length;i++){
+            try{
+                if (Decompose.Operation[i].charAt(0)=='+'){
+                    if (Decompose.Operend[i].charAt(0)=='#'){
+                        try{
+                            Integer.parseInt(Decompose.Operend[i].substring(1,Decompose.Operend[i].length()));
+                            continue;
+                        }catch (Exception e){
+                            M_Line[M_Length++] = GenerateOpcode.Opcode_test[i];
+                        }
+                    }else{
+                        M_Line[M_Length++] = GenerateOpcode.Opcode_test[i];
+                    }
+                }
+            }catch (Exception e){
+                continue;
+            }
+        }
 
+        //找出M欄的Location
+        String[] M_location = new String[M_Length];
+        for (int i=0,j=0;i<M_Length;i++){
+            for (;j<GenerateOpcode.Opcode_test.length;j++){
+                if (M_Line[i].equals(GenerateOpcode.Opcode_test[j])){
+                    M_location[i] = Loc.LocaTion[j++];
+                    break;
+                }
+            }
+        }
 
+        //M欄+1 補0
+        for (int i=0;i<M_Length;i++){
+            M_location[i] = Integer.toHexString(Integer.parseInt(M_location[i],16)+1);
+            for (int j=M_location[i].length();j<6;j++){
+                M_location[i] = "0"+M_location[i];
+            }
+        }
 
-
-
-
-//        if(Loc.locTest[Loc.locTest.length-52].length()<=6)
-//        {
-//            obj.write(name+"  00"+Loc.locTest[Loc.locTest.length-52]);
-//        }
-//        else
-//        {
-//            obj.write(name+"  "+Loc.locTest[Loc.locTest.length-52]);
-//        }
-//
-//        if(Loc.locTest[Loc.locTest.length-1].length()<=6)
-//            obj.write("00"+Loc.locTest[Loc.locTest.length-1]);
-//        else
-//            obj.write(Loc.locTest[Loc.locTest.length-1]+"\n");
-
-
-      //  for(j=0;j<Loc.locTest.length-1;j++)
-       // {
-
-
-            //if(Loc.locTest[j].length()<=6)
-         //   {
-          //      obj.write("00"+Loc.locTest[j]);
-
-        //    }
+        //M欄輸出
+        for (int i=0;i<M_Length;i++){
+            obj.write("M"+M_location[i]+"05"+"\n");
+        }
 
         obj.write("E"+start);
         obj.flush();
         obj.close();
         }
-
-
-
-//
-//
-//
-//
-//
-//        }
-
-
-
     }
 
 
