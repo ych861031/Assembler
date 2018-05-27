@@ -162,12 +162,17 @@ public class GenerateOpcode {
         }
     }
 
-
+    boolean boom=false;
     //位移
     public String Disp(String hex1, String hex2) {
         int sum1 = Integer.parseInt(hex1, 16);
         int sum2 = Integer.parseInt(hex2, 16);
         int sum = sum2 - sum1;
+
+        if(sum>2047||sum<-2048){
+            boom=true;
+        }
+        else{boom=false;}
         Integer.toHexString(sum).toUpperCase();
 
 
@@ -177,17 +182,18 @@ public class GenerateOpcode {
 
             //String sumString = String.valueOf(sum);
 
-            return Integer.toHexString(sum).toUpperCase().substring(5, 8);
+            return Integer.toHexString(sum).toUpperCase().substring(5,8);
 
         }
 
         return Integer.toHexString(sum).toUpperCase();
 
+
     }
 
     //格式操作
     public String bits_operation(String disp,String opcode,int format,String operend) {
-
+        System.out.println(operend);
 //        System.out.println(disp+","+opcode+","+format+","+operend);
 //        int bin;
 //       bin=Integer.parseInt(disp,16);
@@ -256,19 +262,47 @@ public class GenerateOpcode {
                 }if(operend.charAt(0)=='#'){
                 d[0]="0";
                 d[1]="1";
-                }if(operend.contains("X")){
-                d[2]="1";
                 }
+                String x[] =operend.split(",");
+                if(x.length>=2) {
+                    if (x[1].equals("X")) {
+                        d[2] = "1";
+                    }
+                }
+//                if(boom==true){
+//                    int baseToDec=Integer.parseInt(base,16);
+//                    int pcToDec=Integer.parseInt("1095",16);
+//                }
+//                if (disp.charAt(0)=='F'){
+//                    int dispFxx=Integer.parseInt(disp,16);
+//                   // String dispToBin =Integer.toBinaryString(dispFxx);
+//
+//                   // int dispToBinToDec=Integer.parseInt(dispToBin.substring(1,12),2);
+//                    if(dispFxx>2047){
+//                        d[3]="1";
+//                        d[4]="0";
+//                    }
+//                 }
+//                int dispToDec=Integer.parseInt(disp,16);
+//                if(dispToDec>2047||~dispToDec>2048){
+//                    d[3]="1";
+//                    d[4]="0";
+//                }
                 int j;
                 for(j=0;j<Decompose.Operation.length;j++){
                     if(Decompose.Operend[j].equals(operend)){
                         break;
                     }
                 }
-                if(Decompose.Operation[j+1].equals("BASE")){
-                    d[3]="1";
-                    d[4]="0";
-                }
+
+//                if(Decompose.Operation[j+1].equals("BASE")){
+//                    d[3]="1";
+//                    d[4]="0";
+//                }
+
+
+
+
                 String set_3=d[0]+d[1]+d[2]+d[3]+d[4]+d[5];
                 int opcode_1_2=Integer.parseInt(opcode,16);
 
@@ -280,8 +314,8 @@ public class GenerateOpcode {
                 //System.out.println(opcode_2_2);
                 String object_code_3= opcode_2_2.substring(0,6)+set_3;
 
-                int bin_1;
-                bin_1=Integer.parseInt(disp,16);
+                //int bin_1;
+                //bin_1=Integer.parseInt(disp,16);
 
 
                 String bin_string_1 =  disp;
