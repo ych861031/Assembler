@@ -46,7 +46,6 @@ public class output_OBJFILE {
         for (int i=0;i<length;i++){
             if (Decompose.Operation[i].equals("RESW")||Decompose.Operation[i].equals("RESB")){
                 if (!T_Line[T_Length].equals("")){
-                    System.out.println("!");
                     T_Length++;
                 }
             }else{

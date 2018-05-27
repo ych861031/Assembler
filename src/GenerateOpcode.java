@@ -11,6 +11,7 @@ public class GenerateOpcode {
             "134000", "4F0000", "F1", "", "", "", "B410", "774000", "E32011", "332FFA", "53C003", "DF2008", "B850", "3B2FEF", "4F0000", "05", ""
     };
     public static String[] Opcode = new String[Read.lines];
+    public String base;
 
     public void generate() {
 
@@ -34,6 +35,10 @@ public class GenerateOpcode {
                 if (Decompose.Operation[i].equals("BASE")||Decompose.Operation[i].equals("START")||
                         Decompose.Operation[i].equals("RESW")||Decompose.Operation[i].equals("RESB")||
                         Decompose.Operation[i].equals("END")){
+                    if (Decompose.Operation[i].equals("BASE")){
+                        base=Sytab.hashMap.get(Decompose.Operend[i]);
+//                        System.out.println("base:"+base);
+                    }
                     Opcode[i] = "";
                     continue;
                 }
