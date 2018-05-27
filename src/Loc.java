@@ -250,7 +250,7 @@ public class Loc {
     //印出陣列中所有LOC
     public  void Final(String Location[]){
         int i = 0;
-        System.out.println("-----------------------------------");
+        System.out.println("-----------------------------------All LOC print");
         for(i=0;i<55;i++){
             System.out.println(Location[i]);
         }
