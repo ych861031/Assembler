@@ -12,6 +12,7 @@ public class Loc {
 
         boolean boolcheckPlus  = false;
         boolean boolcheckEqualSign = false;
+        boolean boolcheckEQUsub = false;
         int x;
         for(x=0;x<100;x++) {
             LocaTion[x] ="0000";
@@ -21,7 +22,7 @@ public class Loc {
         LocaTion[0] = Decompose.Operend[0];
         LocaTion[0]=checkForFourNum(LocaTion[0]);
         for(i=1;i<100;i++) {
-            switch (Decompose.Operation[i - 1]) {
+            switch (Decompose.Operation[i - 1]) {                             // Label Operation Operand Object_Code
                 case "START":
                     LocaTion[i] = Decompose.Operend[i - 1];
                     LocaTion[i] = checkForFourNum(LocaTion[i]);
@@ -123,14 +124,22 @@ public class Loc {
                         checktest = tmpEQU.charAt(EQUi);
                         //找四則運算符號
                         if(checktest=='-'){
-                            //找到後 拿前後計算用變數名稱
-                            String astring = tmpEQU.substring(0,EQUi);
-                            String bstring = tmpEQU.substring(EQUi+1,tmpEQU.length());
-                            System.out.println(astring+"..."+bstring);
-                            FindLoc(astring);
+                            //找到後 準備拿前後計算用變數名稱用來尋找各自所在LOC
+                            boolcheckEQUsub = true;//一但有找到減號 不用執行下面的判斷式
+                            String astring = tmpEQU.substring(0,EQUi);                 //找到減號前面的字串名稱
+                            String bstring = tmpEQU.substring(EQUi+1,tmpEQU.length()); //找到字串後面的字串名稱
+//                            System.out.println(astring+"..."+bstring);
+                            FindLoc(astring);//找到 string的LOC
+                            FindLoc(bstring);//找到 string的LOC
 
-                            FindLoc(bstring);
+                            LocaTion[i]=LocaTion[i-1];  //因為EQU 有運算時 影響到的是現在的LOC 所以這兩行用來交換上下LOC 希望不會有問題
+                            LocaTion[i-1]=Subtraction(FindLoc(astring),FindLoc(bstring));
+
                         }
+                    }
+                    //一旦找不到減號 辨認為與上一個LOC一樣
+                    if(boolcheckEQUsub==false){
+                        LocaTion[i]=LocaTion[i-1];
                     }
                     break;
                 case "LTORG":
@@ -149,11 +158,32 @@ public class Loc {
                         LocaTion[i] = checkForFourNum(LocaTion[i]);
                         boolcheckPlus = false;
                     } else if(boolcheckEqualSign == true) {
-                        String contentEx = "123\"";
-                        contentEx = Decompose.Operation[i-1] ;
-                        contentEx = contentEx.substring(3,Decompose.Operation[i-1].length()-1);//取C'EOF'
+                        //一旦找到 = 號 進入此判斷式
+                        String contentEx = "";
+                        contentEx = Decompose.Operation[i-1] ;//找出含 = 號 所有值 ex:=C'EOF'
+                        contentEx = contentEx.substring(1,Decompose.Operation[i-1].length());//取C'EOF'
                         System.out.println(contentEx+"222");
 
+                        //判斷第一位是C 還是X
+                        if(contentEx.substring(0,1).equals("C")){
+                            System.out.println(contentEx.substring(2,contentEx.length()-1));
+                            long tmp = Long.parseLong(LocaTion[i - 1], 16);
+                            tmp = tmp + contentEx.substring(2,contentEx.length()-1).length(); //增加EOF長度 3
+                            long last = Long.parseLong(LocaTion[i], 16);
+                            last = last + tmp;
+                            LocaTion[i] = Long.toHexString(last);
+                            LocaTion[i] = checkForFourNum(LocaTion[i]);
+
+                        } else if(contentEx.substring(0,1).equals("X")){
+                            long tmp = Long.parseLong(LocaTion[i - 1], 16);
+                            tmp = tmp +contentEx.substring(2,contentEx.length()-1).length()/2; //增加 X 後值 長度/2 F1=2/1
+                            long last = Long.parseLong(LocaTion[i], 16);
+                            last = last + tmp;
+                            LocaTion[i] = Long.toHexString(last);
+                            LocaTion[i] = checkForFourNum(LocaTion[i]);
+
+                            System.out.println("X");
+                        }
 
                         boolcheckEqualSign = false;
                     } else {
@@ -172,11 +202,12 @@ public class Loc {
             }
         }
         changeUpper(LocaTion);//改成大寫
-//        Final(LocaTion);
+        Final(LocaTion);
 
 
     }
 
+    //不足四個數 補零
     public static String checkForFourNum(String test){
         while(test.length()<4){
             test = "0"+test;
@@ -184,6 +215,8 @@ public class Loc {
         }
         return test;
     }
+
+    //確認opearation有沒有+號
     public boolean checkPlus(String plustest){
         String temporary="";
         if(plustest!="") {
@@ -197,13 +230,14 @@ public class Loc {
         }
     }
 
+    //確認operation有沒有=號
     public boolean checkEqualSign(String signtest) {
 
         String temporary="";
 //        System.out.println(signtest+"00000");
         if(signtest!="") {
             temporary = signtest.substring(0, 1);
-//            System.out.println(temporary);
+//
         }
         if(temporary.equals("=")){
             return true;
@@ -213,14 +247,16 @@ public class Loc {
 
     }
 
+    //印出陣列中所有LOC
     public  void Final(String Location[]){
         int i = 0;
         System.out.println("-----------------------------------");
         for(i=0;i<55;i++){
-            Location[i] = Location[i].toUpperCase();//改成大寫
             System.out.println(Location[i]);
         }
     }
+
+    //將所有LOC 轉換成大寫
     public void changeUpper(String Location[]){
         int i = 0;
         for(i=0;i<100;i++){
@@ -230,22 +266,42 @@ public class Loc {
 
     }
 
-    public void FindLoc(String a){
-        System.out.println(a);
+    //找到符合字串 String a 的位置 回傳LOC值
+    public String FindLoc(String a){
+//        System.out.println(a);
         int k;
+        String backString ="0";
         for(k=0;k<Decompose.Label.length;k++){
 //            System.out.println(Decompose.Label[i]+a);
             String test = Decompose.Label[k];
 
-            if(Decompose.Label[k]!=null){
+            if(test!=null){
                 if(test.equals(a)){
-                    System.out.println(LocaTion[k]);
-                    System.out.println(k);
+//                    System.out.println(LocaTion[k]);
+//                    System.out.println(k);
+                    backString = LocaTion[k];
+                    break;
                 }
             }else{
+
                 break;
             }
         }
+//        System.out.println(backString);
+        return backString;
+
+    }
+
+    //兩個字串型態的十六進位數 相減後得值
+    public String  Subtraction(String a,String b){
+        long tmpA = Long.parseLong(a,16);
+        long tmpB = Long.parseLong(b,16);
+        long tmpSub = tmpA-tmpB;
+        String back = Long.toHexString(tmpSub);
+//        System.out.println(back+"**");
+
+        return back;
+
 
     }
 
