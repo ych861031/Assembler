@@ -140,7 +140,7 @@ public class GenerateOpcode {
                         if (Decompose.Operend[i].contains(",")){
                             String[] split =Decompose.Operend[i].split(",");
                             target = Sytab.hashMap.get(split[0]);
-                            Opcode[i] = bits_operation(Disp(location_next,target),MnemonicCode.hashMap.get(Decompose.Operation[i]),3,Decompose.Operation[i]);
+                            Opcode[i] = bits_operation(Disp(location_next,target),MnemonicCode.hashMap.get(Decompose.Operation[i]),3,Decompose.Operend[i]);
                             continue;
                         }
                         Opcode[i] = "";
