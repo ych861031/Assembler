@@ -85,6 +85,7 @@ public class Loc {
                 case "BASE":
                     LocaTion[i] = LocaTion[i - 1];
                     LocaTion[i - 1] = LocaTion[i - 2];
+//                    illegal_test.hashMap.put(i-1,"***BASE");
                     break;
 
                 case "":
@@ -134,6 +135,10 @@ public class Loc {
 
                             LocaTion[i]=LocaTion[i-1];  //因為EQU 有運算時 影響到的是現在的LOC 所以這兩行用來交換上下LOC 希望不會有問題
                             LocaTion[i-1]=Subtraction(FindLoc(astring),FindLoc(bstring));
+                            if(LocaTion[i-1].equals("00000")){
+                                illegal_test.hashMap.put(i-1," \"****Symbol must be defined before used in EQU statement\"  ");
+                            }
+
 
                         }
                     }
@@ -250,7 +255,7 @@ public class Loc {
     //印出陣列中所有LOC
     public  void Final(String Location[]){
         int i = 0;
-        System.out.println("-----------------------------------");
+        System.out.println("-----------------------------------All LOC print");
         for(i=0;i<55;i++){
             System.out.println(Location[i]);
         }
@@ -270,7 +275,7 @@ public class Loc {
     public String FindLoc(String a){
 //        System.out.println(a);
         int k;
-        String backString ="0";
+        String backString ="    ";
         for(k=0;k<Decompose.Label.length;k++){
 //            System.out.println(Decompose.Label[i]+a);
             String test = Decompose.Label[k];
@@ -282,23 +287,31 @@ public class Loc {
                     backString = LocaTion[k];
                     break;
                 }
-            }else{
+            }
+            else{
 
                 break;
             }
         }
 //        System.out.println(backString);
+
         return backString;
 
     }
 
     //兩個字串型態的十六進位數 相減後得值
     public String  Subtraction(String a,String b){
-        long tmpA = Long.parseLong(a,16);
-        long tmpB = Long.parseLong(b,16);
-        long tmpSub = tmpA-tmpB;
-        String back = Long.toHexString(tmpSub);
-//        System.out.println(back+"**");
+        String back = "1233";
+        try {
+            long tmpA = Long.parseLong(a,16);
+            long tmpB = Long.parseLong(b,16);
+            long tmpSub = tmpA-tmpB;
+            back = Long.toHexString(tmpSub);
+
+        }catch(Exception e){
+            return "00000";
+        }
+//       System.out.println(back+"**");
 
         return back;
 
