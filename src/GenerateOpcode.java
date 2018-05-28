@@ -12,20 +12,13 @@ public class GenerateOpcode {
     };
     public static String[] Opcode = new String[Read.lines];
     public String base;
+    public String pc;
+
 
     public void generate() {
 
-
-//        for (int i=0;i<Decompose.Operation.length;i++){
-//            Disp("1000","1006");
-//        }
-
-//        System.out.println("!!!" + Disp("001A", "0006") + bits_operation("003","A0",2,"A,S"));
-//
-//        System.out.println("!!!" + Disp("001A", "0006") + bits_operation("003","48",2,"A,S"));
-
-
         for (int i=0;i<Read.lines;i++){
+            pc = Loc.LocaTion[i+1];
 //            System.out.println(i+":"+MnemonicCode.hashMap.get(Decompose.Operation[i]));
             if (Decompose.Operation[i].equals("LTORG")){
                 continue;
@@ -123,10 +116,14 @@ public class GenerateOpcode {
                         try {
                             Integer.parseInt(Decompose.Operend[i].substring(1,Decompose.Operend[i].length()));
                             String a = Decompose.Operend[i].substring(1,Decompose.Operend[i].length());
-                            for (int j=a.length();j<=4;j++){
+                            for (int j=a.length();j<4;j++){
                                 a="0"+a;
                             }
-                            Opcode[i] = MnemonicCode.hashMap.get(Decompose.Operend[i])+a;
+                            String opcode = Integer.toHexString(Integer.parseInt(MnemonicCode.hashMap.get(Decompose.Operation[i]),16)+1);
+                            if (opcode.length()<2){
+                                opcode = "0"+opcode;
+                            }
+                            Opcode[i] = opcode+a;
                         }catch (Exception e){
                             illegal_test.hashMap.put(i,"Operend not found");
                         }
@@ -174,8 +171,6 @@ public class GenerateOpcode {
         }
         else{boom=false;}
         Integer.toHexString(sum).toUpperCase();
-
-
         //Integer.valueOf("FFFF",16).toString()
 
         if (sum < 0) {
@@ -193,20 +188,6 @@ public class GenerateOpcode {
 
     //格式操作
     public String bits_operation(String disp,String opcode,int format,String operend) {
-        System.out.println(operend);
-//        System.out.println(disp+","+opcode+","+format+","+operend);
-//        int bin;
-//       bin=Integer.parseInt(disp,16);
-//
-//
-//       String bin_string =  disp;
-//
-//      //  int strLen=disp.length()*4;
-//       for (int i =bin_string.length();i<3;i++){
-//           bin_string ="0"+bin_string;
-//      }
-
-//        System.out.println(bin_string);
 
 
         switch(format){
@@ -254,14 +235,15 @@ public class GenerateOpcode {
                 return final_2.toUpperCase();
             case 3:
                 System.out.println("format 3");
-                //if(str.startsWith("as"))
+
                 String[] d = {"1","1","0","0","1","0"};
                 if(operend.charAt(0)=='@'){
                     d[0]="1";
                     d[1]="0";
-                }if(operend.charAt(0)=='#'){
-                d[0]="0";
-                d[1]="1";
+                }
+                if(operend.charAt(0)=='#'){
+                    d[0]="0";
+                    d[1]="1";
                 }
                 String x[] =operend.split(",");
                 if(x.length>=2) {
@@ -269,10 +251,22 @@ public class GenerateOpcode {
                         d[2] = "1";
                     }
                 }
-//                if(boom==true){
-//                    int baseToDec=Integer.parseInt(base,16);
-//                    int pcToDec=Integer.parseInt("1095",16);
-//                }
+                if(boom){//==true
+                    d[3]="1";
+                    d[4]="0";
+
+                    if (base.equals("null")){
+                        return "";
+                    }
+                    int baseToDec=Integer.parseInt(base,16);
+                    if (operend.charAt(0)!='#'||operend.charAt(0)!='@'){
+                        int location = Integer.parseInt(Sytab.hashMap.get(x[0]),16);
+                        disp = Integer.toHexString(location-baseToDec);
+                    }else{
+                        int location = Integer.parseInt(Sytab.hashMap.get(operend.substring(1,operend.length())),16);
+                        disp = Integer.toHexString(location-baseToDec);
+                    }
+                }
 //                if (disp.charAt(0)=='F'){
 //                    int dispFxx=Integer.parseInt(disp,16);
 //                   // String dispToBin =Integer.toBinaryString(dispFxx);
@@ -294,14 +288,6 @@ public class GenerateOpcode {
                         break;
                     }
                 }
-
-//                if(Decompose.Operation[j+1].equals("BASE")){
-//                    d[3]="1";
-//                    d[4]="0";
-//                }
-
-
-
 
                 String set_3=d[0]+d[1]+d[2]+d[3]+d[4]+d[5];
                 int opcode_1_2=Integer.parseInt(opcode,16);

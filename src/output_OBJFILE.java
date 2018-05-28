@@ -51,15 +51,15 @@ public class output_OBJFILE {
             }else{
                 //如果換行,還沒紀錄objcode
                 if (T_Line[T_Length].equals("")){
-                    T_Start[T_Length] = GenerateOpcode.Opcode_test[i];
+                    T_Start[T_Length] = GenerateOpcode.Opcode[i];
                 }
                 //判斷是否在每行範圍內
-                if (T_Line[T_Length].length() + GenerateOpcode.Opcode_test[i].length()<=58){
-                    T_Line[T_Length]+=GenerateOpcode.Opcode_test[i];
+                if (T_Line[T_Length].length() + GenerateOpcode.Opcode[i].length()<=58){
+                    T_Line[T_Length]+=GenerateOpcode.Opcode[i];
                 }else{
                     T_Length++;
-                    T_Line[T_Length]+=GenerateOpcode.Opcode_test[i];
-                    T_Start[T_Length]=GenerateOpcode.Opcode_test[i];
+                    T_Line[T_Length]+=GenerateOpcode.Opcode[i];
+                    T_Start[T_Length]=GenerateOpcode.Opcode[i];
                 }
             }
         }
@@ -72,8 +72,8 @@ public class output_OBJFILE {
 
         String[] T_Line_Start_Location= new String[T_Length+1];
         for (int i=0;i<T_Start.length;i++){
-            for (int j=0;j<GenerateOpcode.Opcode_test.length;j++){
-                if (GenerateOpcode.Opcode_test[j].equals(T_Start[i])){
+            for (int j=0;j<GenerateOpcode.Opcode.length;j++){
+                if (GenerateOpcode.Opcode[j].equals(T_Start[i])){
 //                    System.out.println(Loc.LocaTion[j]);
                     T_Line_Start_Location[i]=Loc.LocaTion[j];
                     break;
@@ -123,8 +123,8 @@ public class output_OBJFILE {
         //找出M欄的Location
         String[] M_location = new String[M_Length];
         for (int i=0,j=0;i<M_Length;i++){
-            for (;j<GenerateOpcode.Opcode_test.length;j++){
-                if (M_Line[i].equals(GenerateOpcode.Opcode_test[j])){
+            for (;j<GenerateOpcode.Opcode.length;j++){
+                if (M_Line[i].equals(GenerateOpcode.Opcode[j])){
                     M_location[i] = Loc.LocaTion[j++];
                     break;
                 }

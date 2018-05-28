@@ -1,10 +1,8 @@
-import javax.swing.*;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.annotation.Annotation;
+
 
 public class output_LISFILE {
-
 
     public static void  output()throws IOException {
 
@@ -19,9 +17,9 @@ public class output_LISFILE {
 
             //opcode 格式調整
             String opcode ;
-            if (!GenerateOpcode.Opcode_test[i].equals("")){
-                opcode = GenerateOpcode.Opcode_test[i];
-                for (int space = GenerateOpcode.Opcode_test[i].length(); space < 8 ;space++){
+            if (!GenerateOpcode.Opcode[i].equals("")){
+                opcode = GenerateOpcode.Opcode[i];
+                for (int space = GenerateOpcode.Opcode[i].length(); space < 8 ;space++){
                     opcode += " ";
                 }
             }else{

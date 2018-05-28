@@ -16,33 +16,28 @@ public class Main {
         MnemonicCode mnemonicCode = new MnemonicCode();
         mnemonicCode.setHashMap();
 
-//        System.out.println(symbol.getValue("LDX"));
-
         Loc loc = new Loc();
         loc.setLoc();
 
         Sytab sytab = new Sytab();
         sytab.set();
 
-        //test sytab
-//        System.out.println(sytab.get("RDREC"));
-
 
         GenerateOpcode generateOpcode = new GenerateOpcode();
         generateOpcode.generate();
-        illegal_test.hashMap.put(0,"****illegal test****");
+
 
 
         output_LISFILE.output();
         output_OBJFILE.output();
-//        String split = "EOF";
-//        for (int j=0;j<split.length();j++){
-//            System.out.print(Integer.toHexString((int)split.charAt(j)).toUpperCase());
+
+
+//        for (int i=0;i<GenerateOpcode.Opcode.length;i++){
+//            System.out.println(i+":"+GenerateOpcode.Opcode[i]);
 //        }
-//        System.out.println(Decompose.Operation.length);
-//        illegal_test.hashMap.put(i,"***");
 
     }
+
 
 
 
