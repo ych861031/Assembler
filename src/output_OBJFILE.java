@@ -81,8 +81,10 @@ public class output_OBJFILE {
             }
         }
 
+
+
         //Location改為長度必定是6
-        for (int i =0;i<T_Line_Start_Location.length;i++){
+        for (int i =0;i<T_Line_Start_Location.length&&T_Line_Start_Location[i]!=null;i++){
             for (int j = T_Line_Start_Location[i].length();j<6;j++){
                 T_Line_Start_Location[i] = "0" + T_Line_Start_Location[i];
             }
@@ -94,7 +96,7 @@ public class output_OBJFILE {
             T_Line_length[i] = Integer.toHexString(T_Line[i].length()/2).toUpperCase();
         }
         //objfile.txt T欄
-        for (int i=0;i<T_Length+1;i++){
+        for (int i=0;i<T_Length+1&&T_Line_Start_Location[i]!=null;i++){
             obj.write("T"+T_Line_Start_Location[i]+T_Line_length[i]+T_Line[i]+"\n");
         }
 

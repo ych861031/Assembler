@@ -10,31 +10,35 @@ public class Main {
             e.printStackTrace();
         }
 
-        Decompose de = new Decompose();
-        de.decompose(readFile.getLines());
+        try{
+            Decompose de = new Decompose();
+            de.decompose(readFile.getLines());
 
-        MnemonicCode mnemonicCode = new MnemonicCode();
-        mnemonicCode.setHashMap();
+            MnemonicCode mnemonicCode = new MnemonicCode();
+            mnemonicCode.setHashMap();
 
-        Loc loc = new Loc();
-        loc.setLoc();
+            Loc loc = new Loc();
+            loc.setLoc();
 
-        Sytab sytab = new Sytab();
-        sytab.set();
-
-
-        GenerateOpcode generateOpcode = new GenerateOpcode();
-        generateOpcode.generate();
+            Sytab sytab = new Sytab();
+            sytab.set();
 
 
-        output_OBJFILE.output();
-        output_LISFILE.output();
+            GenerateOpcode generateOpcode = new GenerateOpcode();
+            generateOpcode.generate();
+
+            output_OBJFILE.output();
+            output_LISFILE.output();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            FileWriter fr = new FileWriter("Error.txt");
+            fr.write(e.toString());
+            fr.flush();
+            fr.close();
+        }
 
 
-
-//        for (int i=0;i<GenerateOpcode.Opcode.length;i++){
-//            System.out.println(i+":"+GenerateOpcode.Opcode[i]);
-//        }
 
     }
 

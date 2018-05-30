@@ -8,7 +8,7 @@ public class output_LISFILE {
 
         FileWriter fr = new FileWriter("LISFILE.txt");
 
-        for (int i=0;i<Read.lines;i++){
+        for (int i=0;i<Decompose.k+1;i++){
 
             if (Decompose.Annotaion.get(i)!=null){
                 fr.write(Decompose.Annotaion.get(i)+"\n");
@@ -79,14 +79,14 @@ public class output_LISFILE {
                 comments = Decompose.Comments[i];
             }
 
-            if (operation.equals("BASE")||operation.equals("END")){
+            if (Decompose.Operation[i].equals("BASE")||Decompose.Operation[i].equals("END")){
                 Loc.LocaTion[i] = "    ";
             }
 
 
             fr.write(Loc.LocaTion[i]+ " "  + opcode + " " +label+ " " + operation + " "+ operend +" "+ comments +"\n");
 
-            illegal_test illegal = new illegal_test();
+
 
             if (illegal_test.hashMap.containsKey(i)){
                 fr.write(illegal_test.hashMap.get(i)+"\n");

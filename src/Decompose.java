@@ -10,7 +10,7 @@ public class Decompose {
     public static String[] Operend;
     public static String[] Comments;
     public static HashMap<Integer,String> Annotaion = new HashMap<>();
-    public static ArrayList Ann = new ArrayList();
+    public static String[] Ltorg = new String[1000];
     public static int k;
 
     public void decompose(String[] Lines){
@@ -34,7 +34,7 @@ public class Decompose {
             }
 
             if (dot == '.'){
-                Annotaion.put(i,Lines[k]);
+                Annotaion.put(k,Lines[i]);
                 Label[k] = "";
                 Operation[k] = "";
                 Operend[k] = "";
@@ -51,7 +51,6 @@ public class Decompose {
                     break;
                 }
             }
-//            System.out.println(label);
             Label[k] = label;
 
             //opeation
@@ -129,6 +128,7 @@ public class Decompose {
                 Operend[k] = operend;
                 continue;
             }
+
             Operend[k] = operend;
             //comments
             try{
@@ -139,7 +139,53 @@ public class Decompose {
             }catch (Exception e){
                 continue;
             }
+
+            //LTORG操作
+            if (operend.length()>0&&operend.charAt(0)=='='){
+                if (Ltorg[0]==null){
+                    Ltorg[0] = operend;
+
+                }else{
+                    int z;
+                    for (z = 0;Ltorg[z]!=null;z++){
+                        if (Ltorg[z].equals(operend)){
+                            break;
+                        }
+                    }
+                    Ltorg[z] = operend;
+                }
+            }
         }
+
+//        System.out.println(k);
+        boolean y ;//have *
+        for (int i=0;Ltorg[i]!=null;i++){
+            y=true;
+            for (int j=0;j<k;j++){
+                if (Ltorg[i].equals(Operation[j])){
+                    y=false;
+                    break;
+                }
+            }
+            if (y){
+                k++;
+                Label[k] = "*";
+                Operation[k] = Ltorg[i];
+                Operend[k] = "";
+                Comments[k] = "";
+            }
+
+        }
+
+
+//        for (int i =0;Ltorg[i]!=null;i++){
+//            for (int j=0;Operation[j]!=null;j++){
+//                if (!Ltorg[i].equals(Operation[j])) {
+//                    Label[k++]="test";
+//                }
+//            }
+//        }
+
 
         //LTORG操作
 //        for (int j=0;Operend[j]!=null;j++){
@@ -159,13 +205,13 @@ public class Decompose {
 
 
 //        可忽略,查看分解除來的
-        System.out.println("Look Label...");
-        for (int z=0;z<53;z++){
-            if (Label[z]!=null){
-                System.out.println(z+ " " + Label[z]);
-            }
-        }
-//////
+//        System.out.println("Look Label...");
+//        for (int z=0;Label[z]!=null;z++){
+//            if (Label[z]!=null){
+//                System.out.println(z+ " " + Label[z]);
+//            }
+//        }
+
 //        System.out.println("Look Operation...");
 //        for (int z=0;z<Operation.length;z++){
 //            if (Operation[z]!=null){

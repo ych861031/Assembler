@@ -1,33 +1,55 @@
-import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
-
 public class GenerateOpcode {
 
 
-    public static String[] Opcode = new String[Read.lines];
-    public String base;
+    public static String[] Opcode = new String[Decompose.k+1];
+    public String base = "";
     public String pc;
 
 
     public void generate() {
 
 
-        for (int i=0;i<Read.lines;i++){
+        for (int i=0;Decompose.Label[i]!=null;i++){
+            System.out.println(Decompose.Operation[i]);
             pc = Loc.LocaTion[i+1];
 //            System.out.println(i+":"+MnemonicCode.hashMap.get(Decompose.Operation[i]));
             if (Decompose.Operation[i].equals("LTORG")){
+                Opcode[i]= "";
                 continue;
             }
-            if (Decompose.Operation.equals("EQU")){
+            if (Decompose.Operation[i].equals("EQU")){
+                Opcode[i] = "";
                 continue;
             }
 
+
             if (Decompose.Operation[i].length() > 0){
+                if (Decompose.Operation[i].charAt(0)=='='){
+                    String str = Decompose.Operation[i].substring(3,Decompose.Operation[i].length()-1);
+                    Opcode[i] = "";
+                    if (Decompose.Operation[i].charAt(1)=='X'){
+                        Opcode[i] = str;
+                    }else{
+                        for (int s = 0;s<str.length();s++){
+                            Opcode[i] += Integer.toHexString((int)str.charAt(s)).toUpperCase();
+                        }
+                    }
+                    continue;
+                }
                 if (Decompose.Operation[i].equals("BASE")||Decompose.Operation[i].equals("START")||
                         Decompose.Operation[i].equals("RESW")||Decompose.Operation[i].equals("RESB")||
                         Decompose.Operation[i].equals("END")){
+
                     if (Decompose.Operation[i].equals("BASE")){
+                        if (Decompose.Operend[i].charAt(0)=='#'||Decompose.Operend[i].charAt(0)=='@'){
+
+                            base=Sytab.hashMap.get(Decompose.Operend[i].substring(1,Decompose.Operend[i].length()));
+
+                            Opcode[i] = "";
+                            continue;
+                        }
                         base=Sytab.hashMap.get(Decompose.Operend[i]);
-//                        System.out.println("base:"+base);
+
                     }
                     Opcode[i] = "";
                     continue;
@@ -70,6 +92,18 @@ public class GenerateOpcode {
                             continue;
                         }
                     }else{
+                        if (Decompose.Operend[i].charAt(0)=='='){
+                            for (int z=0;z<Decompose.k;z++) {
+                                if (Decompose.Operend[i].equals(Decompose.Operation[z])) {
+
+                                    Opcode[i] = bits_operation(Loc.LocaTion[z],
+                                            MnemonicCode.hashMap.get(Decompose.Operation[i].substring(1,Decompose.Operation[i].length())),
+                                            4,Decompose.Operend[i]);
+                                    break;
+                                }
+                            }
+                            continue;
+                        }
                         Opcode[i] = bits_operation(Sytab.hashMap.get(Decompose.Operend[i]),
                                 MnemonicCode.hashMap.get(Decompose.Operation[i].substring(1,Decompose.Operation[i].length())),
                                 4,
@@ -132,6 +166,22 @@ public class GenerateOpcode {
                     Opcode[i] = bits_operation(Disp(location_next,target),MnemonicCode.hashMap.get(Decompose.Operation[i]),3,Decompose.Operend[i]);
                     continue;
                 }else {
+                    if (Decompose.Operend[i].charAt(0)=='='){
+                        try{
+                            Opcode[i] = "";
+                            for (int z=0;z<Decompose.k;z++){
+                                if (Decompose.Operend[i].equals(Decompose.Operation[z])){
+                                    Opcode[i] = bits_operation(Disp(location_now,Loc.LocaTion[z]),MnemonicCode.hashMap.get(Decompose.Operation[i]),3,Decompose.Operend[i]);
+                                    break;
+                                }
+                            }
+                            continue;
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+
                     if(Sytab.hashMap.get(Decompose.Operend[i])!=null){
                         target = Sytab.hashMap.get(Decompose.Operend[i]);
 //                        System.out.println(i+":"+MnemonicCode.hashMap.get(Decompose.Operation[i]));
@@ -140,6 +190,7 @@ public class GenerateOpcode {
                     }else{
                         if (Decompose.Operend[i].contains(",")){
                             String[] split =Decompose.Operend[i].split(",");
+                            System.out.println(split[0]);
                             target = Sytab.hashMap.get(split[0]);
                             Opcode[i] = bits_operation(Disp(location_next,target),MnemonicCode.hashMap.get(Decompose.Operation[i]),3,Decompose.Operend[i]);
                             continue;
@@ -254,7 +305,7 @@ public class GenerateOpcode {
                     d[3]="1";
                     d[4]="0";
 
-                    if (base.equals("null")){
+                    if (base.equals("")){
                         return "";
                     }
                     int baseToDec=Integer.parseInt(base,16);
