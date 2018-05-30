@@ -82,7 +82,7 @@ public class output_OBJFILE {
         }
 
         //Location改為長度必定是6
-        for (int i =0;i<5;i++){
+        for (int i =0;i<T_Line_Start_Location.length;i++){
             for (int j = T_Line_Start_Location[i].length();j<6;j++){
                 T_Line_Start_Location[i] = "0" + T_Line_Start_Location[i];
             }
@@ -109,10 +109,10 @@ public class output_OBJFILE {
                             Integer.parseInt(Decompose.Operend[i].substring(1,Decompose.Operend[i].length()));
                             continue;
                         }catch (Exception e){
-                            M_Line[M_Length++] = GenerateOpcode.Opcode_test[i];
+                            M_Line[M_Length++] = GenerateOpcode.Opcode[i];
                         }
                     }else{
-                        M_Line[M_Length++] = GenerateOpcode.Opcode_test[i];
+                        M_Line[M_Length++] = GenerateOpcode.Opcode[i];
                     }
                 }
             }catch (Exception e){

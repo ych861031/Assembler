@@ -2,15 +2,17 @@ import java.util.HashMap;
 
 public class illegal_test {
     public static HashMap<Integer,String> hashMap = new HashMap<>();
-    private  HashMap<Integer,String> hashMap2 = new HashMap<>();
 
-    public void set(int i,String s){
-        this.hashMap2.put(5,"1000");
+
+    public static void put(int i, String newString){
+
+        if (hashMap.containsKey(i)){
+
+            String s = hashMap.get(i);
+            hashMap.put(i,s+"\n"+newString);
+
+        }else{
+            hashMap.put(i,newString);
+        }
     }
-
-    public String get(int i){
-        System.out.println(this.hashMap2.get(i));
-        return this.hashMap2.get(i);
-    }
-
 }

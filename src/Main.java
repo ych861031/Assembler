@@ -27,9 +27,9 @@ public class Main {
         generateOpcode.generate();
 
 
-
-        output_LISFILE.output();
         output_OBJFILE.output();
+        output_LISFILE.output();
+
 
 
 //        for (int i=0;i<GenerateOpcode.Opcode.length;i++){

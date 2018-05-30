@@ -2,14 +2,7 @@ import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
 
 public class GenerateOpcode {
 
-    public static String[] Opcode_test = {
-            "", "17202D", "69202D", "", "4B101036",
-            "032026", "290000", "332007", "4B10105D", "3F2FEC",
-            "032010", "0F2016", "010003", "0F200D", "4B10105D",
-            "3E2003", "454F46", "", "", "", "", "", "",
-            "B410", "B400", "B440", "75101000", "E32019", "332FFA", "DB2013", "A004", "332008", "57C003", "B850", "3B2FEA",
-            "134000", "4F0000", "F1", "", "", "", "B410", "774000", "E32011", "332FFA", "53C003", "DF2008", "B850", "3B2FEF", "4F0000", "05", ""
-    };
+
     public static String[] Opcode = new String[Read.lines];
     public String base;
     public String pc;
@@ -17,10 +10,14 @@ public class GenerateOpcode {
 
     public void generate() {
 
+
         for (int i=0;i<Read.lines;i++){
             pc = Loc.LocaTion[i+1];
 //            System.out.println(i+":"+MnemonicCode.hashMap.get(Decompose.Operation[i]));
             if (Decompose.Operation[i].equals("LTORG")){
+                continue;
+            }
+            if (Decompose.Operation.equals("EQU")){
                 continue;
             }
 
@@ -70,6 +67,7 @@ public class GenerateOpcode {
                                 MnemonicCode.hashMap.get(Decompose.Operation[i].substring(1,Decompose.Operation[i].length())),
                                 4,
                                 Decompose.Operend[i]);
+                            continue;
                         }
                     }else{
                         Opcode[i] = bits_operation(Sytab.hashMap.get(Decompose.Operend[i]),
@@ -126,6 +124,7 @@ public class GenerateOpcode {
                             Opcode[i] = opcode+a;
                         }catch (Exception e){
                             illegal_test.hashMap.put(i,"Operend not found");
+
                         }
                         continue;
                     }
@@ -188,7 +187,7 @@ public class GenerateOpcode {
 
     //格式操作
     public String bits_operation(String disp,String opcode,int format,String operend) {
-
+//        System.out.println(disp+" "+opcode+" "+operend);
 
         switch(format){
             case 2:
@@ -267,27 +266,13 @@ public class GenerateOpcode {
                         disp = Integer.toHexString(location-baseToDec);
                     }
                 }
-//                if (disp.charAt(0)=='F'){
-//                    int dispFxx=Integer.parseInt(disp,16);
-//                   // String dispToBin =Integer.toBinaryString(dispFxx);
-//
-//                   // int dispToBinToDec=Integer.parseInt(dispToBin.substring(1,12),2);
-//                    if(dispFxx>2047){
-//                        d[3]="1";
-//                        d[4]="0";
-//                    }
-//                 }
-//                int dispToDec=Integer.parseInt(disp,16);
-//                if(dispToDec>2047||~dispToDec>2048){
-//                    d[3]="1";
-//                    d[4]="0";
-//                }
-//                int j;
-//                for(j=0;j<Decompose.Operation.length;j++){
-//                    if(Decompose.Operend[j].equals(operend)){
-//                        break;
-//                    }
-//                }
+
+                    int j;
+                    for(j=0;j<Decompose.Operation.length;j++){
+                        if(Decompose.Operend[j].equals(operend)){
+                            break;
+                        }
+                }
 
                 String set_3=d[0]+d[1]+d[2]+d[3]+d[4]+d[5];
                 int opcode_1_2=Integer.parseInt(opcode,16);

@@ -79,6 +79,11 @@ public class output_LISFILE {
                 comments = Decompose.Comments[i];
             }
 
+            if (operation.equals("BASE")||operation.equals("END")){
+                Loc.LocaTion[i] = "    ";
+            }
+
+
             fr.write(Loc.LocaTion[i]+ " "  + opcode + " " +label+ " " + operation + " "+ operend +" "+ comments +"\n");
 
             illegal_test illegal = new illegal_test();

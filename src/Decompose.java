@@ -16,16 +16,23 @@ public class Decompose {
     public void decompose(String[] Lines){
 
         System.out.println("decompose...");
-        Label = new String[100];
-        Operation = new String[100];
-        Operend = new String[100];
-        Comments = new String[100];
+        Label = new String[1000];
+        Operation = new String[1000];
+        Operend = new String[1000];
+        Comments = new String[1000];
+        int length = Lines.length;
 
         k=-1;//save index all save was change
 
-        for (int i=0;i<Lines.length;i++){
+        for (int i=0;i<length;i++){
             k++;
-            char dot = Lines[i].charAt(0);
+            char dot = ' ';
+            try{
+                dot = Lines[i].charAt(0);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
             if (dot == '.'){
                 Annotaion.put(i,Lines[k]);
                 Label[k] = "";
@@ -134,16 +141,30 @@ public class Decompose {
             }
         }
 
+        //LTORG操作
+//        for (int j=0;Operend[j]!=null;j++){
+//            if (Operend[j].length()>0){
+//                if (Operend[j].charAt(0)=='='){
+//                    System.out.println("!!!!1");
+//                    Label[k]="*";
+//                    Operation[k]= Operend[j];
+//                    Operend[k] = "";
+//                    System.out.println(Operation[k]);
+//                    k++;
+//                }
+//            }
+//        }
+
 
 
 
 //        可忽略,查看分解除來的
-//        System.out.println("Look Label...");
-//        for (int k=0;k<Label.length;k++){
-//            if (Label[k]!=null){
-//                System.out.println(k+ " " + Label[k]);
-//            }
-//        }
+        System.out.println("Look Label...");
+        for (int z=0;z<53;z++){
+            if (Label[z]!=null){
+                System.out.println(z+ " " + Label[z]);
+            }
+        }
 //////
 //        System.out.println("Look Operation...");
 //        for (int z=0;z<Operation.length;z++){
