@@ -15,7 +15,7 @@ public class Sytab {
 
         for (int i=0;i<l;i++){
 
-            hashMap.put(Decompose.Label[i],Loc.locTest[i]);
+            hashMap.put(Decompose.Label[i],Loc.LocaTion[i]);
         }
     }
 

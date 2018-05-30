@@ -1,11 +1,8 @@
 import java.security.acl.LastOwnerException;
 
 public class Loc {
-    public static String[] locTest = {"0000", "0000", "0003","    " ,"0006", "000A", "000D","0010","0013", "0017", "001A", "001D", "0020",
-            "0023", "0026", "002A", "002D", "0030", "0033", "0036","    ","    ","    ",  "1036","1038", "103A", "103C", "1040", "1043", "1046",
-            "1049", "104B", "104E","1051", "1053", "1056", "1059", "105C","    ","    ","    ",  "105D", "105F", "1062", "1065", "1068","106B","106E","1070","1073","1076","    "};
 
-    public static String LocaTion[] = new String[100];
+    public static String LocaTion[] = new String[1000];
 
 
     public void setLoc() {
@@ -14,14 +11,14 @@ public class Loc {
         boolean boolcheckEqualSign = false;
         boolean boolcheckEQUsub = false;
         int x;
-        for(x=0;x<100;x++) {
+        for(x=0;x<1000;x++) {
             LocaTion[x] ="0000";
         }
 
         int i ;
         LocaTion[0] = Decompose.Operend[0];
         LocaTion[0]=checkForFourNum(LocaTion[0]);
-        for(i=1;i<100;i++) {
+        for(i=1;Decompose.Label[i]!=null;i++) {
             switch (Decompose.Operation[i - 1]) {                             // Label Operation Operand Object_Code
                 case "START":
                     LocaTion[i] = Decompose.Operend[i - 1];
@@ -202,9 +199,9 @@ public class Loc {
 
                 break;
             }
-            if (Decompose.Operation[i].equals("END") ){
-                break;
-            }
+//            if (Decompose.Operation[i].equals("END") ){
+//                break;
+//            }
         }
         changeUpper(LocaTion);//改成大寫
         Final(LocaTion);
@@ -256,7 +253,7 @@ public class Loc {
     public  void Final(String Location[]){
         int i = 0;
         System.out.println("-----------------------------------All LOC print");
-        for(i=0;i<55;i++){
+        for(i=0;Decompose.Label[i]!=null;i++){
             System.out.println(Location[i]);
         }
     }
