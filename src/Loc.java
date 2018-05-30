@@ -78,6 +78,7 @@ public class Loc {
 
                     break;
                 case "END":
+                    LocaTion[i]=LocaTion[i-1];
                     break;
                 case "BASE":
                     LocaTion[i] = LocaTion[i - 1];
