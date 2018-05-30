@@ -282,12 +282,12 @@ public class GenerateOpcode {
 //                    d[3]="1";
 //                    d[4]="0";
 //                }
-                int j;
-                for(j=0;j<Decompose.Operation.length;j++){
-                    if(Decompose.Operend[j].equals(operend)){
-                        break;
-                    }
-                }
+//                int j;
+//                for(j=0;j<Decompose.Operation.length;j++){
+//                    if(Decompose.Operend[j].equals(operend)){
+//                        break;
+//                    }
+//                }
 
                 String set_3=d[0]+d[1]+d[2]+d[3]+d[4]+d[5];
                 int opcode_1_2=Integer.parseInt(opcode,16);
