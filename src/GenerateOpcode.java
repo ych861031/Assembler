@@ -171,7 +171,7 @@ public class GenerateOpcode {
                             Opcode[i] = "";
                             for (int z=0;z<Decompose.k;z++){
                                 if (Decompose.Operend[i].equals(Decompose.Operation[z])){
-                                    Opcode[i] = bits_operation(Disp(location_now,Loc.LocaTion[z]),MnemonicCode.hashMap.get(Decompose.Operation[i]),3,Decompose.Operend[i]);
+                                    Opcode[i] = bits_operation(Disp(location_next,Loc.LocaTion[z]),MnemonicCode.hashMap.get(Decompose.Operation[i]),3,Decompose.Operend[i]);
                                     break;
                                 }
                             }
@@ -309,6 +309,7 @@ public class GenerateOpcode {
                         return "";
                     }
                     int baseToDec=Integer.parseInt(base,16);
+
                     if (operend.charAt(0)!='#'||operend.charAt(0)!='@'){
                         int location = Integer.parseInt(Sytab.hashMap.get(x[0]),16);
                         disp = Integer.toHexString(location-baseToDec);

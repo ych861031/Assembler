@@ -10,7 +10,7 @@ public class Read {
     public String[] Lines;
     public static int lines;
     public void read() throws IOException {
-        String path = "SRCFIL3.txt";
+        String path = "SRCFILE.txt";
         fileReader = new FileReader(path);
 
         lines = count();
@@ -29,6 +29,9 @@ public class Read {
             System.out.println(Lines[i]);
         }
         fileReader.close();
+        if (lines>1000){
+            illegal_test.hashMap.put(lines,"***more than 1000***");
+        }
     }
     public String[] getLines(){
         return this.Lines;

@@ -27,6 +27,8 @@ public class Main {
             GenerateOpcode generateOpcode = new GenerateOpcode();
             generateOpcode.generate();
 
+            illegal_test.find_error();
+
             output_OBJFILE.output();
             output_LISFILE.output();
 
@@ -37,17 +39,5 @@ public class Main {
             fr.flush();
             fr.close();
         }
-
-
-
     }
-
-
-
-
-
-
-
-
-
 }
