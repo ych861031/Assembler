@@ -4,13 +4,6 @@ import java.io.IOException;
 public class output_OBJFILE {
 
     public static void output()throws IOException {
-        //下面這行可以拿到opcode
-        //GenerateOpcode.Opcode_test;
-
-        //去網路上找寫檔案的方法
-        //ex: File ... = new file;
-
-        //基本上就是按照規則把opcode 輸出到檔案上
         int length = Decompose.k;
 
         FileWriter obj=new FileWriter("OBJFILE.txt") ;
@@ -34,7 +27,7 @@ public class output_OBJFILE {
         {
             endLocation= "0"+endLocation;
         }
-        obj.write(name+start+endLocation+"\n");//第一行
+        obj.write(name+start+endLocation+"\r\n");//第一行
 
         //T列處理
         String[] T_Line = new String[100]; //T每列的所有opcode
@@ -97,7 +90,7 @@ public class output_OBJFILE {
         }
         //objfile.txt T欄
         for (int i=0;i<T_Length+1&&T_Line_Start_Location[i]!=null;i++){
-            obj.write("T"+T_Line_Start_Location[i]+T_Line_length[i]+T_Line[i]+"\n");
+            obj.write("T"+T_Line_Start_Location[i]+T_Line_length[i]+T_Line[i]+"\r\n");
         }
 
         String[] M_Line = new String[100];
@@ -143,7 +136,7 @@ public class output_OBJFILE {
 
         //M欄輸出
         for (int i=0;i<M_Length;i++){
-            obj.write("M"+M_location[i]+"05"+"\n");
+            obj.write("M"+M_location[i]+"05"+"\r\n");
         }
 
         obj.write("E"+start);

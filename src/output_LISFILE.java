@@ -11,7 +11,7 @@ public class output_LISFILE {
         for (int i=0;i<Decompose.k+1;i++){
 
             if (Decompose.Annotaion.get(i)!=null){
-                fr.write(Decompose.Annotaion.get(i)+"\n");
+                fr.write(Decompose.Annotaion.get(i)+"\r\n");
                 continue;
             }
 
@@ -84,12 +84,12 @@ public class output_LISFILE {
             }
 
 
-            fr.write(Loc.LocaTion[i]+ " "  + opcode + " " +label+ " " + operation + " "+ operend +" "+ comments +"\n");
+            fr.write(Loc.LocaTion[i]+ " "  + opcode + " " +label+ " " + operation + " "+ operend +" "+ comments +"\r\n");
 
 
 
             if (illegal_test.hashMap.containsKey(i)){
-                fr.write(illegal_test.hashMap.get(i)+"\n");
+                fr.write(illegal_test.hashMap.get(i)+"\r\n");
             }
         }
         fr.flush();
