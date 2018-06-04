@@ -220,9 +220,9 @@ public class Decompose {
 //        }
 
 //        System.out.println("Look Operend...");
-//        for (int k=0;k<Operend.length;k++){
-//            if (Operend[k]!=null){
-//                System.out.println(Operend[k]);
+//        for (int z=0;z<Operend.length;z++){
+//            if (Operend[z]!=null){
+//                System.out.println(Operend[z]);
 //            }
 //        }
 

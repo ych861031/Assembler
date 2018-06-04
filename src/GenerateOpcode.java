@@ -196,7 +196,7 @@ public class GenerateOpcode {
                             continue;
                         }
                         Opcode[i] = "";
-                        illegal_test.hashMap.put(i,"Operend not found");
+//                        illegal_test.hashMap.put(i,"Operend not found");
                         continue;
                     }
                 }
@@ -308,7 +308,12 @@ public class GenerateOpcode {
                     if (base.equals("")){
                         return "";
                     }
-                    int baseToDec=Integer.parseInt(base,16);
+                    int baseToDec;
+                    try{
+                        baseToDec=Integer.parseInt(base,16);
+                    }catch (Exception e){
+                        return "";
+                    }
 
                     if (operend.charAt(0)!='#'||operend.charAt(0)!='@'){
                         int location = Integer.parseInt(Sytab.hashMap.get(x[0]),16);
